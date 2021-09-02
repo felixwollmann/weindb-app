@@ -26,7 +26,7 @@ import 'package:flutter/foundation.dart'; // ChangeNotifier
 // import 'package:shared_preferences/shared_preferences.dart';
 
 
-String base = 'http://192.168.100.35/'; // TODO: shared-preferences für host
+String base = 'http://192.168.100.10/'; // TODO: shared-preferences für host
 
 
 
