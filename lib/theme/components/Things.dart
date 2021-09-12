@@ -31,6 +31,7 @@ class WeinePage extends StatelessWidget {
               Wein? newWein = await Navigator.push(
                   context,
                   MaterialPageRoute(
+                      fullscreenDialog: true,
                       builder: (_) => WeineForm(
                             startingValue:
                                 Provider.of<Weine>(context)[wein.id]!,
@@ -111,6 +112,8 @@ class WeinbauernPage extends StatelessWidget {
               Weinbauer? newWeinbauer = await Navigator.push(
                   context,
                   MaterialPageRoute(
+                      fullscreenDialog: true,
+
                       builder: (_) => WeinbauernForm(
                             startingValue:
                                 Provider.of<Weinbauern>(context)[weinbauer.id]!,
@@ -170,6 +173,8 @@ class SortenPage extends StatelessWidget {
               Sorte? newSorte = await Navigator.push(
                   context,
                   MaterialPageRoute(
+                      fullscreenDialog: true,
+
                       builder: (_) => SortenForm(
                             startingValue:
                                 Provider.of<Sorten>(context)[sorte.id]!,
@@ -233,6 +238,8 @@ class RegionenPage extends StatelessWidget {
               Region? newSorte = await Navigator.push(
                   context,
                   MaterialPageRoute(
+                      fullscreenDialog: true,
+
                       builder: (_) => RegionenForm(
                             startingValue:
                                 Provider.of<Regionen>(context)[region.id]!,
