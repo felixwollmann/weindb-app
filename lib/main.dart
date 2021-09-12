@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:weindb/pages/settings.dart';
+import 'package:weindb/settings_generation/settings_generation.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weindb/theme/theme.dart' as theme;
 import 'package:weindb/home.dart' as home;
 import 'package:provider/provider.dart';
 import 'package:weindb/classes/classes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(App(
+    settings: AppSettings(sharedPreferences: prefs, settingsEntries: [
+      AppSettingsEntry(
+        'api-host',
+        defaultValue: 'http://192.168.100.10/',
+        title: 'Datenbank-Server',
+        type: AppSettingsEntryType.String,
+        icon: Icon(Icons.memory_outlined),
+        description: 'Der Server, auf dem die API läuft. Wirkt erst nach Neustart der App. Wenn du nicht weißt, was diese Einstellung bewirkt, lasse sie auf dem Standard, da sonst die App nicht mehr funktioniert.'
+      )
+    ]),
+  ));
 }
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
+
+  final AppSettings settings;
+
+  App({required this.settings});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +57,7 @@ class App extends StatelessWidget {
             return weine!;
           },
         ),
+        ChangeNotifierProvider<AppSettings>.value(value: settings),
 
         // In this sample app, CatalogModel never changes, so a simple Provider
         // is sufficient.
@@ -59,6 +80,7 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         title: 'Wein-Datenbank',
         home: home.Page(),
+        routes: {'settings': (BuildContext context) => SettingsPage()},
         // bottomNavigationBar:
       ),
     );

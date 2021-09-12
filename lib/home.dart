@@ -112,6 +112,9 @@ class _PageState extends State<Page> {
             Icons.search,
           ),
         ),
+        actions: [
+          IconButton(onPressed: () => Navigator.of(context).pushNamed('settings'), icon: Icon(Icons.settings))
+        ],
         // actions: [
         //   IconButton(
         //       onPressed: () {

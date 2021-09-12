@@ -19,6 +19,7 @@ export './sharedPrefs.dart';
 
 // import 'dart:convert'; // JSON <-> UTF-8
 import 'package:flutter/foundation.dart'; // ChangeNotifier
+import 'package:weindb/settings_generation/settings_generation.dart';
 // import 'package:quiver/collection.dart'; // DelegatingMap
 // import 'package:http/http.dart' as http; // http-Aufrufe
 // import 'package:equatable/equatable.dart'; // Klassen vergleichen
@@ -26,8 +27,8 @@ import 'package:flutter/foundation.dart'; // ChangeNotifier
 // import 'package:shared_preferences/shared_preferences.dart';
 
 
-String base = 'http://192.168.100.10/'; // TODO: shared-preferences für host
-
+String base = AppSettingsNoContext.getString('api-host'); // TODO: shared-preferences für host
+// String base = 'http://192.168.100.10/'; 
 
 
 // class Weine<Wein> {
