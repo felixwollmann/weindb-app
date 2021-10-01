@@ -58,6 +58,7 @@ class _PageState extends State<Page> {
                     Wein? newWein = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => WeineForm(),
+                        fullscreenDialog: true,
                       ),
                     );
                     if (newWein != null)
@@ -66,6 +67,7 @@ class _PageState extends State<Page> {
                     Weinbauer? newWeinbauer = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => WeinbauernForm(),
+                        fullscreenDialog: true,
                       ),
                     );
                     if (newWeinbauer != null)
@@ -75,6 +77,7 @@ class _PageState extends State<Page> {
                     Sorte? newSorte = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => SortenForm(),
+                        fullscreenDialog: true,
                       ),
                     );
                     if (newSorte != null)
@@ -83,6 +86,7 @@ class _PageState extends State<Page> {
                     Region? newRegion = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => RegionenForm(),
+                        fullscreenDialog: true,
                       ),
                     );
                     if (newRegion != null)
