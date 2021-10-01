@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weindb/classes/classes.dart';
 import 'package:weindb/pages/search.dart';
+import 'package:weindb/pages/stats.dart';
 // import 'package:weindb/pages/settings.dart';
 // import 'package:provider/provider.dart';
 // import 'package:weindb/classes.dart';
@@ -24,13 +25,15 @@ class _PageState extends State<Page> {
     WeinePage.appBarName,
     WeinbauernPage.appBarName,
     SortenPage.appBarName,
-    RegionenPage.appBarName
+    RegionenPage.appBarName,
+    StatsPage.appBarName
   ];
   static const List<Widget> _widgetOptions = <Widget>[
     WeinePage(),
     WeinbauernPage(),
     SortenPage(),
-    RegionenPage()
+    RegionenPage(),
+    StatsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,61 +45,62 @@ class _PageState extends State<Page> {
 
   @override
   Widget build(BuildContext context) {
-
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () async {
-          try {
-            if (_selectedIndex == 0) {
-              Wein? newWein = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => WeineForm(),
-                ),
-              );
-              if (newWein != null)
-                Provider.of<Weine>(context, listen: false).add(newWein);
-            } else if (_selectedIndex == 1) {
-              Weinbauer? newWeinbauer = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => WeinbauernForm(),
-                ),
-              );
-              if (newWeinbauer != null)
-                Provider.of<Weinbauern>(context, listen: false)
-                    .add(newWeinbauer);
-            } else if (_selectedIndex == 2) {
-              Sorte? newSorte = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => SortenForm(),
-                ),
-              );
-              if (newSorte != null)
-                Provider.of<Sorten>(context, listen: false)
-                    .add(newSorte);
-            } else if (_selectedIndex == 3) {
-              Region? newRegion = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => RegionenForm(),
-                ),
-              );
-              if (newRegion != null)
-                Provider.of<Regionen>(context, listen: false).add(newRegion);
-            }
-          } catch (err) {
-            print(err);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Beim Erstellen ist ein Fehler aufgetreten, bitte überprüfe deine Internetverbindung',
-                ),
-              ),
-            );
-          }
-        },
-      ),
+      floatingActionButton: _selectedIndex >= 4
+          ? null
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () async {
+                try {
+                  if (_selectedIndex == 0) {
+                    Wein? newWein = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => WeineForm(),
+                      ),
+                    );
+                    if (newWein != null)
+                      Provider.of<Weine>(context, listen: false).add(newWein);
+                  } else if (_selectedIndex == 1) {
+                    Weinbauer? newWeinbauer = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => WeinbauernForm(),
+                      ),
+                    );
+                    if (newWeinbauer != null)
+                      Provider.of<Weinbauern>(context, listen: false)
+                          .add(newWeinbauer);
+                  } else if (_selectedIndex == 2) {
+                    Sorte? newSorte = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SortenForm(),
+                      ),
+                    );
+                    if (newSorte != null)
+                      Provider.of<Sorten>(context, listen: false).add(newSorte);
+                  } else if (_selectedIndex == 3) {
+                    Region? newRegion = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RegionenForm(),
+                      ),
+                    );
+                    if (newRegion != null)
+                      Provider.of<Regionen>(context, listen: false)
+                          .add(newRegion);
+                  }
+                } catch (err) {
+                  print(err);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Beim Erstellen ist ein Fehler aufgetreten, bitte überprüfe deine Internetverbindung',
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
       appBar: AppBar(
         title: Text(
           appBarTitle,
@@ -113,7 +117,9 @@ class _PageState extends State<Page> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () => Navigator.of(context).pushNamed('settings'), icon: Icon(Icons.settings))
+          IconButton(
+              onPressed: () => Navigator.of(context).pushNamed('settings'),
+              icon: Icon(Icons.settings))
         ],
         // actions: [
         //   IconButton(
@@ -145,6 +151,10 @@ class _PageState extends State<Page> {
             icon: Icon(RegionenPage.icon),
             label: RegionenPage.appBarName,
           ),
+          BottomNavigationBarItem(
+            icon: Icon(StatsPage.icon),
+            label: StatsPage.appBarName,
+          )
         ],
         currentIndex: _selectedIndex,
         // selectedItemColor: Colors.amber[800],

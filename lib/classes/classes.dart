@@ -27,7 +27,7 @@ import 'package:weindb/settings_generation/settings_generation.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 
-String base = AppSettingsNoContext.getString('api-host'); // TODO: shared-preferences für host
+String base = AppSettingsNoContext.getString('api-host');
 // String base = 'http://192.168.100.10/'; 
 
 

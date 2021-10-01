@@ -129,6 +129,17 @@ Widget listItem(
           shape: BoxShape.circle,
           color: Theme.of(context).colorScheme.wein(wein.sorte.farbenName),
         ),
+        alignment: Alignment.center,
+        child: FittedBox(
+          alignment: Alignment.center,
+          child: Text(
+            '${wein.anzahl}',
+            style: TextStyle(
+              color:
+                  Theme.of(context).colorScheme.onWein(wein.sorte.farbenName),
+            ),
+          ),
+        ),
       ),
     ),
 

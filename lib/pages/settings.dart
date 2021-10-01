@@ -22,6 +22,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Einstellungen'),
+        actions: [IconButton(icon: Icon(Icons.info_outline_rounded), onPressed: () => showAboutDialog(context: context))],
       ),
       body: ListView(
         children: [

@@ -33,6 +33,9 @@ class _WeinbauernFormState extends State<WeinbauernForm> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
+    final List<Region> regionen = Provider.of<Regionen>(context).values.toList()
+      ..sort((region1, region2) => region1.name.compareTo(region2.name));
+
     Widget regionSelect = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -75,8 +78,7 @@ class _WeinbauernFormState extends State<WeinbauernForm> {
                   regionValue = newValue!;
                 });
               },
-              items: Provider.of<Regionen>(context)
-                  .values
+              items: regionen
                   .toList()
                   .map<DropdownMenuItem<Region>>((Region value) {
                 return DropdownMenuItem<Region>(
@@ -90,8 +92,6 @@ class _WeinbauernFormState extends State<WeinbauernForm> {
         ],
       ),
     );
-
-   
 
     return Scaffold(
       appBar: AppBar(
@@ -148,7 +148,6 @@ class _WeinbauernFormState extends State<WeinbauernForm> {
       ),
     );
   }
-
 
   /// Sammelt alle Daten ein, erstellt daraus einen Wein, popt diesen Bildschirm vom Navigator
   /// und übergibt dabei den erstellten Wein

@@ -8,7 +8,7 @@ class CountListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     TextStyle textStyle =
-        TextStyle(color: theme.colorScheme.onPrimary, fontSize: 20);
+        TextStyle(color: theme.colorScheme.onPrimary, fontSize: 17);
     TextStyle numberTextStyle = GoogleFonts.quicksand(
       textStyle: TextStyle(
         color: theme.colorScheme.onPrimary,
@@ -25,24 +25,31 @@ class CountListItem extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Row(
         children: [
-          for (int i = 0; i < values.length; i++)
+          for (int i = 0; i < values.length; i++) 
             Expanded(
               child: Container(
+                alignment: Alignment.center,
+                // padding: EdgeInsets.only(right: i < values.length - 1 ? 10 : 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      values.keys.toList()[i],
-                      style: textStyle,
+                    FittedBox(
+                      child: Text(
+                        values.keys.toList()[i],
+                        style: textStyle,
+                      ),
                     ),
-                    Text(
-                      values.values.toList()[i].toString(),
-                      style: numberTextStyle,
+                    FittedBox(
+                      child: Text(
+                        values.values.toList()[i].toString(),
+                        style: numberTextStyle,
+                      ),
                     ),
                   ],
                 ),
               ),
-            )
+            ),
+
         ],
       ),
     );

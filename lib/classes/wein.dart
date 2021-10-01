@@ -96,7 +96,7 @@ class Wein extends Equatable {
 
     Weinbauer? weinbauer;
     if (data['weinbauern'] != null) {
-      if (regionen.containsKey(data['weinbauern_id'])) {
+      if (weinbauern.containsKey(data['weinbauern_id'])) {
         weinbauer = weinbauern[data['weinbauern_id']]!;
       } else {
         weinbauer = Weinbauer.fromMap(data['weinbauern'], weinbauern);

@@ -18,12 +18,14 @@ class RegionenForm extends StatefulWidget {
 class _RegionenFormState extends State<RegionenForm> {
   final nameController = TextEditingController();
   final landController = TextEditingController();
+  final beschreibungController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     nameController.text = this.widget.startingValue?.name ?? '';
     landController.text = this.widget.startingValue?.land ?? '';
+    beschreibungController.text = this.widget.startingValue?.beschreibung ?? '';
   }
 
   @override
@@ -75,6 +77,20 @@ class _RegionenFormState extends State<RegionenForm> {
               ),
 
               SizedBox(height: 10),
+              TextFormField(
+                controller: beschreibungController,
+                maxLines: 1000000,
+                minLines: 2,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  labelText: 'Beschreibung',
+                  prefixIcon: Icon(Icons.subject),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
 
               // Add TextFormFields and ElevatedButton here.
             ],
@@ -91,14 +107,13 @@ class _RegionenFormState extends State<RegionenForm> {
 
     // bool textFieldValidation = formKey.currentState!.validate();
 
-    if (!formKey.currentState!.validate() ) return;
+    if (!formKey.currentState!.validate()) return;
 
-    Region newRegion = Region(
-      Provider.of<Regionen>(context, listen: false),
-      id: this.widget.startingValue?.id ?? 0,
-      name: nameController.text,
-      land: landController.text,
-    );
+    Region newRegion = Region(Provider.of<Regionen>(context, listen: false),
+        id: this.widget.startingValue?.id ?? 0,
+        name: nameController.text,
+        land: landController.text,
+        beschreibung: beschreibungController.text);
 
     Navigator.pop(context, newRegion);
   }

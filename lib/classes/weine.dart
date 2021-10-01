@@ -39,9 +39,9 @@ class Weine extends DelegatingMap<int, Wein> with ChangeNotifier, publicNotify {
     }
   }
 
-  factory Weine.get() {
+  factory Weine.get({Uri? overridenUrl}) {
     Weine weine = Weine({});
-    weine.reload(show: true);
+    weine.reload(show: true,);
     return weine;
   }
 

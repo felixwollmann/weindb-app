@@ -52,17 +52,21 @@ class WeinePage extends StatelessWidget {
                     Colors.white
                 ? Brightness.dark
                 : Brightness.light,
-            customFunctions: Provider.of<Weine>(context)[wein.id]!.anzahl <= 0 ? null : {
-              'Als getrunken markieren': () async {
-                try {
-                  await Provider.of<Weine>(context, listen: false)[wein.id]!.drink();
-                } catch (err) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                          'Beim als getrunken markieren des Weines ist ein Fehler aufgetreten. Bitte überprüfe deine Internetverbindung.')));
-                }
-              }
-            },
+            customFunctions: Provider.of<Weine>(context)[wein.id]!.anzahl <= 0
+                ? null
+                : {
+                    'Als getrunken markieren': () async {
+                      try {
+                        await Provider.of<Weine>(context,
+                                listen: false)[wein.id]!
+                            .drink();
+                      } catch (err) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                'Beim als getrunken markieren des Weines ist ein Fehler aufgetreten. Bitte überprüfe deine Internetverbindung.')));
+                      }
+                    }
+                  },
           );
         },
       ),
@@ -72,17 +76,19 @@ class WeinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Weine weine = Provider.of<Weine>(context);
-    List<Wein> weinList = weine.values.toList();
+    List<Wein> weinList = weine.values.toList()
+      ..sort((wein1, wein2) => wein1.sorte.name.compareTo(wein2.sorte.name));
     // ThemeData theme = Theme.of(context);
 
-    Widget listView = ListView.separated(
+    Widget listView = Scrollbar(
+        child: ListView.separated(
       itemCount: weine.length,
       separatorBuilder: (context, index) => Divider(),
       itemBuilder: (BuildContext context, int index) {
         Wein wein = weinList[index];
         return weinComponents.listItem(wein, tapped, context);
       },
-    );
+    ));
 
     return weine.showProgress
         ? Center(child: CircularProgressIndicator())
@@ -113,7 +119,6 @@ class WeinbauernPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       fullscreenDialog: true,
-
                       builder: (_) => WeinbauernForm(
                             startingValue:
                                 Provider.of<Weinbauern>(context)[weinbauer.id]!,
@@ -132,16 +137,20 @@ class WeinbauernPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Weinbauern weinbauern = Provider.of<Weinbauern>(context);
-    List<Weinbauer> weinbauernList = weinbauern.values.toList();
+    List<Weinbauer> weinbauernList = weinbauern.values.toList()
+      ..sort((weinbauer1, weinbauer2) =>
+          weinbauer1.name.compareTo(weinbauer2.name));
     // ThemeData theme = Theme.of(context);
 
-    var listView = ListView.separated(
-      itemCount: weinbauern.length,
-      separatorBuilder: (context, index) => Divider(),
-      itemBuilder: (BuildContext context, int index) {
-        Weinbauer weinbauer = weinbauernList[index];
-        return weinbauernComponents.listItem(weinbauer, tapped, context);
-      },
+    var listView = Scrollbar(
+      child: ListView.separated(
+        itemCount: weinbauern.length,
+        separatorBuilder: (context, index) => Divider(),
+        itemBuilder: (BuildContext context, int index) {
+          Weinbauer weinbauer = weinbauernList[index];
+          return weinbauernComponents.listItem(weinbauer, tapped, context);
+        },
+      ),
     );
     return weinbauern.showProgress
         ? Center(child: CircularProgressIndicator())
@@ -174,7 +183,6 @@ class SortenPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       fullscreenDialog: true,
-
                       builder: (_) => SortenForm(
                             startingValue:
                                 Provider.of<Sorten>(context)[sorte.id]!,
@@ -199,16 +207,19 @@ class SortenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Sorten sorten = Provider.of<Sorten>(context);
-    List<Sorte> sortenList = sorten.values.toList();
+    List<Sorte> sortenList = sorten.values.toList()
+      ..sort((sorte1, sorte2) => sorte1.name.compareTo(sorte2.name));
     // ThemeData theme = Theme.of(context);
 
-    var listView = ListView.separated(
-      itemCount: sorten.length,
-      separatorBuilder: (context, index) => Divider(),
-      itemBuilder: (BuildContext context, int index) {
-        Sorte sorte = sortenList[index];
-        return sortenComponents.listItem(sorte, tapped, context);
-      },
+    var listView = Scrollbar(
+      child: ListView.separated(
+        itemCount: sorten.length,
+        separatorBuilder: (context, index) => Divider(),
+        itemBuilder: (BuildContext context, int index) {
+          Sorte sorte = sortenList[index];
+          return sortenComponents.listItem(sorte, tapped, context);
+        },
+      ),
     );
     return sorten.showProgress
         ? Center(child: CircularProgressIndicator())
@@ -239,7 +250,6 @@ class RegionenPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       fullscreenDialog: true,
-
                       builder: (_) => RegionenForm(
                             startingValue:
                                 Provider.of<Regionen>(context)[region.id]!,
@@ -258,16 +268,19 @@ class RegionenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Regionen regionen = Provider.of<Regionen>(context);
-    List<Region> regionenList = regionen.values.toList();
+    List<Region> regionenList = regionen.values.toList()
+      ..sort((region1, region2) => region1.name.compareTo(region2.name));
     // ThemeData theme = Theme.of(context);
 
-    var listView = ListView.separated(
-      itemCount: regionen.length,
-      separatorBuilder: (context, index) => Divider(),
-      itemBuilder: (BuildContext context, int index) {
-        Region region = regionenList[index];
-        return regionenComponents.listItem(region, tapped, context);
-      },
+    var listView = Scrollbar(
+      child: ListView.separated(
+        itemCount: regionen.length,
+        separatorBuilder: (context, index) => Divider(),
+        itemBuilder: (BuildContext context, int index) {
+          Region region = regionenList[index];
+          return regionenComponents.listItem(region, tapped, context);
+        },
+      ),
     );
     return regionen.showProgress
         ? Center(child: CircularProgressIndicator())

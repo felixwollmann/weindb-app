@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:weindb/classes/classes.dart';
 import 'package:weindb/theme/components/AllComponents.dart';
 
-
 String _errorFieldEmpty = 'Das Feld darf nicht leer sein';
 
 class WeineForm extends StatefulWidget {
@@ -31,17 +30,18 @@ class _WeineFormState extends State<WeineForm> {
   final preisController = TextEditingController();
   final beschreibungController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
     nameController.text = this.widget.startingValue?.name ?? '';
     anzahlController.text = this.widget.startingValue?.anzahl.toString() ?? '';
     getrunkenController.text =
-        this.widget.startingValue?.getrunken.toString() ?? '';
+        this.widget.startingValue?.getrunken.toString() ??
+            (this.widget.startingValue == null ? "0" : '');
     fachController.text = this.widget.startingValue?.fach?.toString() ?? '';
     jahrController.text = this.widget.startingValue?.jahr?.toString() ?? '';
-    inhaltController.text = this.widget.startingValue?.inhalt?.toString() ?? '';
+    inhaltController.text = this.widget.startingValue?.inhalt?.toString() ??
+        (this.widget.startingValue == null ? "0,75" : '');
     preisController.text = this.widget.startingValue?.preis?.toString() ?? '';
     beschreibungController.text = this.widget.startingValue?.beschreibung ?? '';
 
@@ -54,6 +54,13 @@ class _WeineFormState extends State<WeineForm> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+
+    final List<Sorte> sorten = Provider.of<Sorten>(context).values.toList()
+      ..sort((sorte1, sorte2) => sorte1.name.compareTo(sorte2.name));
+    final List<Weinbauer> weinbauern = Provider.of<Weinbauern>(context)
+        .values
+        .toList()
+      ..sort((wb1, wb2) => wb1.name.compareTo(wb2.name));
 
     Widget weinbauerSelect = Container(
       decoration: BoxDecoration(
@@ -97,9 +104,7 @@ class _WeineFormState extends State<WeineForm> {
                   weinbauerValue = newValue!;
                 });
               },
-              items: Provider.of<Weinbauern>(context)
-                  .values
-                  .toList()
+              items: weinbauern
                   .map<DropdownMenuItem<Weinbauer>>((Weinbauer value) {
                 return DropdownMenuItem<Weinbauer>(
                   value: value,
@@ -157,10 +162,7 @@ class _WeineFormState extends State<WeineForm> {
                   sorteValue = newValue!;
                 });
               },
-              items: Provider.of<Sorten>(context)
-                  .values
-                  .toList()
-                  .map<DropdownMenuItem<Sorte>>((Sorte value) {
+              items: sorten.map<DropdownMenuItem<Sorte>>((Sorte value) {
                 return DropdownMenuItem<Sorte>(
                   value: value,
                   child: Text(value.name,
@@ -446,7 +448,9 @@ class _WeineFormState extends State<WeineForm> {
       jahr: int.tryParse(jahrController.text),
       weinbauer: weinbauerValue,
       gekauft: selectedDate,
-      beschreibung: beschreibungController.text == '' ? null : beschreibungController.text,
+      beschreibung: beschreibungController.text == ''
+          ? null
+          : beschreibungController.text,
       inhalt: double.tryParse(inhaltController.text),
       fach: int.tryParse(fachController.text),
       preis: int.tryParse(preisController.text),

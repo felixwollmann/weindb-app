@@ -13,14 +13,13 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(App(
     settings: AppSettings(sharedPreferences: prefs, settingsEntries: [
-      AppSettingsEntry(
-        'api-host',
-        defaultValue: 'http://192.168.100.10/',
-        title: 'Datenbank-Server',
-        type: AppSettingsEntryType.String,
-        icon: Icon(Icons.memory_outlined),
-        description: 'Der Server, auf dem die API läuft. Wirkt erst nach Neustart der App. Wenn du nicht weißt, was diese Einstellung bewirkt, lasse sie auf dem Standard, da sonst die App nicht mehr funktioniert.'
-      )
+      AppSettingsEntry('api-host',
+          defaultValue: 'http://192.168.100.10/',
+          title: 'Datenbank-Server',
+          type: AppSettingsEntryType.String,
+          icon: Icon(Icons.memory_outlined),
+          description:
+              'Der Server, auf dem die API läuft. Wirkt erst nach Neustart der App. Wenn du nicht weißt, was diese Einstellung bewirkt, lasse sie auf dem Standard, da sonst die App nicht mehr funktioniert.')
     ]),
   ));
 }
@@ -49,6 +48,7 @@ class App extends StatelessWidget {
               weinbauern?.regionen = regionen;
               return weinbauern!;
             }),
+        ChangeNotifierProvider<AppSettings>.value(value: settings),
         ChangeNotifierProxyProvider2<Sorten, Weinbauern, Weine>(
           create: (context) => Weine.get(),
           update: (context, sorten, weinbauern, weine) {
@@ -57,8 +57,6 @@ class App extends StatelessWidget {
             return weine!;
           },
         ),
-        ChangeNotifierProvider<AppSettings>.value(value: settings),
-
         // In this sample app, CatalogModel never changes, so a simple Provider
         // is sufficient.
         // Provider(create: (context) => CatalogModel()),
