@@ -84,7 +84,7 @@ class MySearchDelegate extends SearchDelegate<String> {
   Widget _getSearchResults(BuildContext context) {
     // _test(context);
     return _SearchResults(query, () {
-      this.close(context, query);
+      // this.close(context, query);
     });
   }
 
