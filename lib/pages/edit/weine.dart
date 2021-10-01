@@ -41,7 +41,7 @@ class _WeineFormState extends State<WeineForm> {
     fachController.text = this.widget.startingValue?.fach?.toString() ?? '';
     jahrController.text = this.widget.startingValue?.jahr?.toString() ?? '';
     inhaltController.text = this.widget.startingValue?.inhalt?.toString() ??
-        (this.widget.startingValue == null ? "0,75" : '');
+        (this.widget.startingValue == null ? "0.75" : '');
     preisController.text = this.widget.startingValue?.preis?.toString() ?? '';
     beschreibungController.text = this.widget.startingValue?.beschreibung ?? '';
 
