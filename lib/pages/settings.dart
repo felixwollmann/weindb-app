@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weindb/settings_generation/settings_generation.dart';
 // import 'package:weindb/classes/classes.dart';
 // import 'package:flutter/services.dart';
@@ -16,8 +16,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppSettings prefs = Provider.of<AppSettings>(context);
-    final TextEditingController tempController = TextEditingController()
-    ..text = prefs.getString('api-host');
+    // final TextEditingController tempController = TextEditingController()
+    // ..text = prefs.getString('api-host');
     // ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(

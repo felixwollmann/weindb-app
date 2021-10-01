@@ -92,7 +92,7 @@ ThemeData theme(
       primaryColorBrightness:
           ThemeData.estimateBrightnessForColor(colorScheme.primary),
       primaryColorDark: colorScheme.primaryVariant,
-      accentColor: colorScheme.secondary,
+      // accentColor: colorScheme.secondary,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedIconTheme:
             IconThemeData(color: light ? Colors.grey[700] : Colors.grey[500]),
@@ -104,7 +104,7 @@ ThemeData theme(
         // elevation: 100,
       ),
       appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
+          // backwardsCompatibility: false,
           color: colorScheme.primary,
           titleTextStyle:
               _textTheme.headline6!.copyWith(color: colorScheme.onPrimary),

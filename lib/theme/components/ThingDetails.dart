@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // import 'package:weindb/theme/colors.dart';
 // ignore: must_be_immutable
@@ -56,7 +57,8 @@ class ThingDetails extends StatelessWidget {
           title,
           style: theme.textTheme.headline6!.copyWith(color: onColor),
         ),
-        brightness: brightness,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        // brightness: brightness,
         backgroundColor: color,
         iconTheme: IconThemeData(color: onColor),
         actions: <Widget>[
