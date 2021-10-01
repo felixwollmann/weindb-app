@@ -22,7 +22,24 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Einstellungen'),
-        actions: [IconButton(icon: Icon(Icons.info_outline_rounded), onPressed: () => showAboutDialog(context: context))],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info_outline_rounded),
+            onPressed: () => showAboutDialog(
+              applicationName: 'Wein-Datenbank',
+              applicationVersion:
+                  '1.2.0', // legalese kopiert von https://opensource.org/licenses/MIT
+              applicationIcon: Image.asset(
+                'assets/icons/icon.png',
+                width: 50,
+                semanticLabel: 'Wein-Datenbank-App-Icon',
+              ),
+              applicationLegalese:
+                  'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.',
+              context: context,
+            ),
+          ),
+        ],
       ),
       body: ListView(
         children: [
