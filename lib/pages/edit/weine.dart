@@ -348,9 +348,7 @@ class _WeineFormState extends State<WeineForm> {
                 controller: inhaltController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 validator: (val) {
-                  bool isDouble =
-                      double.tryParse(val?.replaceFirst(',', '.') ?? '') !=
-                          null;
+                  bool isDouble = double.tryParse(val ?? '') != null;
                   if (val == null || val == '') {
                     return null;
                   } else if (!isDouble) {
@@ -372,10 +370,10 @@ class _WeineFormState extends State<WeineForm> {
                 controller: preisController,
                 keyboardType: TextInputType.number,
                 validator: (val) {
-                  bool isInt = int.tryParse(val ?? '') != null;
+                  bool isDouble = double.tryParse(val ?? '') != null;
                   if (val == null || val == '') {
                     return null;
-                  } else if (!isInt) {
+                  } else if (!isDouble) {
                     return 'Der Wert muss eine Zahl sein';
                   } else {
                     return null;
@@ -430,8 +428,6 @@ class _WeineFormState extends State<WeineForm> {
   /// Sammelt alle Daten ein, erstellt daraus einen Wein, popt diesen Bildschirm vom Navigator
   /// und übergibt dabei den erstellten Wein
   void save(BuildContext context, GlobalKey<FormState> formKey) {
-    print('yes');
-
     // bool textFieldsValid = formKey.currentState!.validate();
 
     // bool textFieldValidation = formKey.currentState!.validate();
@@ -453,7 +449,7 @@ class _WeineFormState extends State<WeineForm> {
           : beschreibungController.text,
       inhalt: double.tryParse(inhaltController.text),
       fach: int.tryParse(fachController.text),
-      preis: int.tryParse(preisController.text),
+      preis: double.tryParse(preisController.text),
     );
 
     Navigator.pop(context, newWein);

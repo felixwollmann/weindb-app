@@ -43,7 +43,7 @@ class Wein extends Equatable {
   final int? fach;
 
   /// Preis des Weins in €
-  final int? preis;
+  final double? preis;
 
   /// Relevanz des Weins, wenn er bei einer Suche zurückgegeben wurde
   final double? relevance;
@@ -85,7 +85,7 @@ class Wein extends Equatable {
   ) {
     var sorten = weine.sorten!;
     var weinbauern = weine.weinbauern!;
-    var regionen = weinbauern.regionen!;
+    // var regionen = weinbauern.regionen!;
     Sorte sorte;
     if (sorten.containsKey(data['sorten_id'])) {
       sorte = sorten[data['sorten_id']]!;
@@ -118,7 +118,9 @@ class Wein extends Equatable {
             ? null
             : double.tryParse(data['inhalt'].toString()),
         fach: data['fach'],
-        preis: data['preis'],
+        preis: data['preis'] == null
+            ? null
+            : double.tryParse(data['preis'].toString()),
         relevance: data['relevance'] == null
             ? null
             : double.tryParse(data['relevance'].toString()));
