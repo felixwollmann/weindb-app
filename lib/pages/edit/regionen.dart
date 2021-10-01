@@ -113,7 +113,9 @@ class _RegionenFormState extends State<RegionenForm> {
         id: this.widget.startingValue?.id ?? 0,
         name: nameController.text,
         land: landController.text,
-        beschreibung: beschreibungController.text);
+        beschreibung: beschreibungController.text == ''
+          ? null
+          : beschreibungController.text,);
 
     Navigator.pop(context, newRegion);
   }
