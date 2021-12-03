@@ -115,14 +115,14 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Wein',
-        'sorte': {'id': 1, 'name': 'Sorte', 'farbe': 0},
+        'sorten': {'id': 1, 'name': 'Sorte', 'farbe': 0},
         'anzahl': 1,
         'getrunken': 1,
         'jahr': 2020,
-        'weinbauer': {
+        'weinbauern': {
           'id': 1,
           'name': 'Weinbauer',
-          'region': {'id': 1, 'name': 'Region', 'land': 'AT'},
+          'regionen': {'id': 1, 'name': 'Region', 'land': 'AT'},
           'beschreibung': 'Beschreibung'
         },
         'gekauft': jetzt.toIso8601String(),
@@ -162,14 +162,14 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Wein',
-        'sorte': {'id': 1, 'name': 'Sorte', 'farbe': 0},
+        'sorten': {'id': 1, 'name': 'Sorte', 'farbe': 0},
         'anzahl': 1,
         'getrunken': 1,
         'jahr': 2020,
-        'weinbauer': {
+        'weinbauern': {
           'id': 1,
           'name': 'Weinbauer',
-          'region': {'id': 1, 'name': 'Region', 'land': 'AT', 'beschreibung': null},
+          'regionen': {'id': 1, 'name': 'Region', 'land': 'AT', 'beschreibung': null},
           'beschreibung': 'Beschreibung'
         },
         'gekauft': jetzt.toIso8601String(),

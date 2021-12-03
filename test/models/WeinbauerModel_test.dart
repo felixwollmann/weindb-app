@@ -56,7 +56,7 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Weinbauer',
-        'region': {
+        'regionen': {
           'id': 1,
           'name': 'Region',
           'land': 'AT',
@@ -80,7 +80,7 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Weinbauer',
-        'region': {
+        'regionen': {
           'id': 1,
           'name': 'Region',
           'land': 'AT',

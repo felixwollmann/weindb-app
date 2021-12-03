@@ -32,7 +32,7 @@ class WeinbauerModel extends Equatable {
   factory WeinbauerModel.fromJson(Map<String, dynamic> json) => WeinbauerModel(
     id: json['id'] as int,
     name: json['name'] as String,
-    region: json['region'] == null ? null : RegionModel.fromJson(json['region'] as Map<String, dynamic>),
+    region: json['regionen'] == null ? null : RegionModel.fromJson(json['regionen'] as Map<String, dynamic>),
     beschreibung: json['beschreibung'] as String?,
   );
 
@@ -40,7 +40,7 @@ class WeinbauerModel extends Equatable {
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
-    'region': region?.toJson(),
+    'regionen': region?.toJson(),
     'beschreibung': beschreibung,
   };
 }
