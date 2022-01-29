@@ -35,7 +35,9 @@ void main() {
   });
 
   group('Integration', () {
-    test('Add a Wein and make sure it is saved in the Database', () async {
+    test(
+        'Add a Wein and make sure it is saved in the Database, then delete it again',
+        () async {
       final sorte = (await db.getSorten())[1];
       final weinbauer = (await db.getWeinbauern())[1];
       final jetzt = DateTime.now();
@@ -56,32 +58,77 @@ void main() {
       final int weinAddedId = await db.postWein(wein);
       expect(weinAddedId > 0, true, reason: 'ID muss größer als 0 sein');
 
-      final weine = await db.getWeine();
-      expect(weine.any((wein) => wein.id == weinAddedId), true, reason: 'Wein wurde nicht zur Datenbank hinzugefügt');
-      // expect(weine.any((element) => element == weinAdded), true, reason: 'Wein was not added to the Database');
+      var weine = await db.getWeine();
+      expect(weine.any((wein) => wein.id == weinAddedId), true,
+          reason: 'Wein wurde nicht zur Datenbank hinzugefügt');
 
+      final newWein = weine.firstWhere((element) => element.id == weinAddedId);
+
+      final newSorte = (await db.getSorten())[2];
+      final editedWein = newWein.copyWith(
+        name: 'TEST-WEIN-EDIT',
+        sorte: newSorte,
+        anzahl: 11,
+        preis: 11.0,
+        weinbauer: weinbauer,
+        gekauft: jetzt,
+        beschreibung: "Hallo",
+      );
+
+      await db.patchWein(editedWein);
+      weine = await db.getWeine();
+      
+      expect(weine.any((element) => element.id == weinAddedId), true,
+          reason: 'Wein wurde nicht zur Datenbank hinzugefügt');
+      final savedEditedWein = weine.firstWhere((element) => element.id == weinAddedId);
+      expect(savedEditedWein.name, 'TEST-WEIN-EDIT');
+      expect(savedEditedWein.sorte, newSorte);
+      expect(savedEditedWein.anzahl, 11);
+      expect(savedEditedWein.preis, 11.0);
+      expect(savedEditedWein.weinbauer, weinbauer);
+      expect(savedEditedWein.gekauft!.difference(jetzt) <= Duration(seconds: 1), true); // ~1 second tolerance
+      expect(savedEditedWein.beschreibung, 'Hallo');
+
+      await db.deleteWein(newWein);
+      weine = await db.getWeine();
+
+      expect(!weine.any((wein) => wein.id == weinAddedId), true,
+          reason: 'Wein wurde nicht aus der Datenbank entfernt');
 
       
-      // await db.saveWein(wein);
+    });
 
-      // final wei1n = WeinModel(
-      //   id: 1,
-      //   name: 'Wein',
-      //   sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
-      //   anzahl: 1,
-      //   getrunken: 1,
-      //   jahr: 2020,
-      //   weinbauer: WeinbauerModel(
-      //       id: 1,
-      //       name: 'Weinbauer',
-      //       region: RegionModel(id: 1, name: 'Region', land: 'AT'),
-      //       beschreibung: 'Beschreibung'),
-      //   gekauft: jetzt,
-      //   beschreibung: 'Beschreibung',
-      //   inhalt: 0.75,
-      //   fach: 10,
-      //   preis: 10.0,
-      // );
+    test('Add a Sorte and make sure it is saved, then delete it again', () async {
+      var sorten = await db.getSorten();
+      final sorte = SorteModel(
+        id: 0,
+        name: 'TEST-SORTE ⚙🦷🎡', // idk, just make sure the encoding works
+        farbe: WeinFarbe.orange,
+      );
+
+      var createdId = await db.postSorte(sorte);
+
+      sorten = await db.getSorten();
+      expect(sorten.any((element) => element.id == createdId), true, reason: 'Sorte existiert nicht');
+      var createdSorte = sorten.where((element) => element.id == createdId).first;
+      expect(createdSorte.name, 'TEST-SORTE ⚙🦷🎡', reason: 'Name stimmt nicht überein');
+      expect(createdSorte.farbe, WeinFarbe.orange, reason: 'Farbe stimmt nicht überein');
+      expect(createdSorte.id, createdId, reason: 'ID stimmt nicht überein');
+
+      createdSorte = createdSorte.copyWith(name: 'test-sorte', farbe: WeinFarbe.rose);
+      await db.patchSorte(createdSorte);
+
+      sorten = await db.getSorten();
+      var editedSorte = sorten.firstWhere((element) => element.id == createdId);
+
+      expect(editedSorte.name, 'test-sorte', reason: 'Name stimmt nicht überein');
+      expect(editedSorte.farbe, WeinFarbe.rose, reason: 'Farbe stimmt nicht überein');
+
+      await db.deleteSorte(editedSorte);
+      sorten = await db.getSorten();
+      expect(sorten.any((element) => element.id == createdId), false, reason: 'Sorte wurde nicht gelöscht');
     });
   });
+
+  // TODO: Weitere Tests für die delete-Sachen
 }
