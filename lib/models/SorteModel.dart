@@ -26,4 +26,18 @@ class SorteModel extends Equatable {
         'name': name,
         'farbe': WeinFarbenHelper.toInt(farbe),
       };
+
+  // copyWith
+  SorteModel copyWith({
+    int? id,
+    String? name,
+    WeinFarbe? farbe,
+  }) {
+    return SorteModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      farbe: farbe ?? this.farbe,
+    );
+  }
+
 }

@@ -33,4 +33,18 @@ class RegionModel extends Equatable {
     'beschreibung': beschreibung,
   };
 
+  // copyWith
+  RegionModel copyWith({
+    int? id,
+    String? name,
+    String? land,
+    String? beschreibung,
+  }) =>
+      RegionModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        land: land ?? this.land,
+        beschreibung: beschreibung ?? this.beschreibung,
+      );
+
 }

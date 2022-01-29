@@ -43,4 +43,17 @@ class WeinbauerModel extends Equatable {
     'regionen_id': region?.id,
     'beschreibung': beschreibung,
   };
+
+  // copyWith
+  WeinbauerModel copyWith({
+    int? id,
+    String? name,
+    RegionModel? region,
+    String? beschreibung,
+  }) => WeinbauerModel(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    region: region ?? this.region,
+    beschreibung: beschreibung ?? this.beschreibung,
+  );
 }

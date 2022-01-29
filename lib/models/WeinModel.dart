@@ -105,4 +105,33 @@ class WeinModel extends Equatable {
         'fach': fach,
         'preis': preis,
       };
+
+  // copyWith
+  WeinModel copyWith(
+          {int? id,
+          String? name,
+          SorteModel? sorte,
+          int? anzahl,
+          int? getrunken,
+          int? jahr,
+          WeinbauerModel? weinbauer,
+          DateTime? gekauft,
+          String? beschreibung,
+          double? inhalt,
+          int? fach,
+          double? preis}) =>
+      WeinModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        sorte: sorte ?? this.sorte,
+        anzahl: anzahl ?? this.anzahl,
+        getrunken: getrunken ?? this.getrunken,
+        jahr: jahr ?? this.jahr,
+        weinbauer: weinbauer ?? this.weinbauer,
+        gekauft: gekauft ?? this.gekauft,
+        beschreibung: beschreibung ?? this.beschreibung,
+        inhalt: inhalt ?? this.inhalt,
+        fach: fach ?? this.fach,
+        preis: preis ?? this.preis,
+      );
 }
