@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:weindb/classes/classes.dart';
+// import 'package:weindb/classes/classes.dart';
 import 'package:weindb/models/models.dart';
 import 'package:weindb/cubits/DatabaseProvider.dart';
 // import 'pac'
@@ -53,6 +53,13 @@ void main() {
         fach: 10,
         preis: 10.0,
       );
+      final int weinAddedId = await db.postWein(wein);
+      expect(weinAddedId > 0, true, reason: 'ID muss größer als 0 sein');
+
+      final weine = await db.getWeine();
+      expect(weine.any((wein) => wein.id == weinAddedId), true, reason: 'Wein wurde nicht zur Datenbank hinzugefügt');
+      // expect(weine.any((element) => element == weinAdded), true, reason: 'Wein was not added to the Database');
+
 
       
       // await db.saveWein(wein);

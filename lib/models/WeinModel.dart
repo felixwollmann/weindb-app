@@ -94,11 +94,11 @@ class WeinModel extends Equatable {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'sorten': sorte.toJson(),
+        'sorten_id': sorte.id,
         'anzahl': anzahl,
         'getrunken': getrunken,
         'jahr': jahr,
-        'weinbauern': weinbauer?.toJson(),
+        'weinbauern_id': weinbauer?.id,
         'gekauft': gekauft?.toIso8601String(),
         'beschreibung': beschreibung,
         'inhalt': inhalt,

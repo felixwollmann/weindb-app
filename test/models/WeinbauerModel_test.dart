@@ -80,12 +80,7 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Weinbauer',
-        'regionen': {
-          'id': 1,
-          'name': 'Region',
-          'land': 'AT',
-          'beschreibung': null
-        },
+        'regionen_id': 1,
         'beschreibung': 'Beschreibung',
       };
 

@@ -162,16 +162,11 @@ void main() {
       final json = {
         'id': 1,
         'name': 'Wein',
-        'sorten': {'id': 1, 'name': 'Sorte', 'farbe': 0},
+        'sorten_id': 1,
         'anzahl': 1,
         'getrunken': 1,
         'jahr': 2020,
-        'weinbauern': {
-          'id': 1,
-          'name': 'Weinbauer',
-          'regionen': {'id': 1, 'name': 'Region', 'land': 'AT', 'beschreibung': null},
-          'beschreibung': 'Beschreibung'
-        },
+        'weinbauern_id': 1,
         'gekauft': jetzt.toIso8601String(),
         'beschreibung': 'Beschreibung',
         'inhalt': 0.75,

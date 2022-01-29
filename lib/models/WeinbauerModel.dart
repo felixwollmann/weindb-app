@@ -40,7 +40,7 @@ class WeinbauerModel extends Equatable {
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
-    'regionen': region?.toJson(),
+    'regionen_id': region?.id,
     'beschreibung': beschreibung,
   };
 }
