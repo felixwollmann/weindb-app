@@ -77,16 +77,18 @@ void main() {
 
       await db.patchWein(editedWein);
       weine = await db.getWeine();
-      
+
       expect(weine.any((element) => element.id == weinAddedId), true,
           reason: 'Wein wurde nicht zur Datenbank hinzugefügt');
-      final savedEditedWein = weine.firstWhere((element) => element.id == weinAddedId);
+      final savedEditedWein =
+          weine.firstWhere((element) => element.id == weinAddedId);
       expect(savedEditedWein.name, 'TEST-WEIN-EDIT');
       expect(savedEditedWein.sorte, newSorte);
       expect(savedEditedWein.anzahl, 11);
       expect(savedEditedWein.preis, 11.0);
       expect(savedEditedWein.weinbauer, weinbauer);
-      expect(savedEditedWein.gekauft!.difference(jetzt) <= Duration(seconds: 1), true); // ~1 second tolerance
+      expect(savedEditedWein.gekauft!.difference(jetzt) <= Duration(seconds: 1),
+          true); // ~1 second tolerance
       expect(savedEditedWein.beschreibung, 'Hallo');
 
       await db.deleteWein(newWein);
@@ -94,11 +96,59 @@ void main() {
 
       expect(!weine.any((wein) => wein.id == weinAddedId), true,
           reason: 'Wein wurde nicht aus der Datenbank entfernt');
-
-      
     });
 
-    test('Add a Sorte and make sure it is saved, then delete it again', () async {
+    test('Add a Region and make sure it is saved, then delete it again',
+        () async {
+      var regionen = await db.getRegionen();
+      final RegionModel region = RegionModel(
+        id: 0,
+        name: 'TEST-REGION',
+        land: "AT",
+        beschreibung: "Hallo",
+      );
+
+      var createdId = await db.postRegion(region);
+
+      expect(regionen.any((element) => element.id == createdId), false,
+          reason: 'Region existiert schon, obwohl sie es noch nicht sollte');
+      regionen = await db.getRegionen();
+      expect(regionen.any((element) => element.id == createdId), true,
+          reason: 'Region existiert nicht');
+      var createdRegion =
+          regionen.firstWhere((element) => element.id == createdId);
+
+      expect(createdRegion.id, createdId);
+      expect(createdRegion.name, 'TEST-REGION');
+      expect(createdRegion.land, 'AT');
+      expect(createdRegion.beschreibung, 'Hallo');
+
+      // createdRegion = createdRegion.copyWith(name: 'test-region', beschreibung: null);
+      // copyWith does can't set values to null
+      createdRegion = RegionModel(
+          id: createdRegion.id,
+          name: 'test-region',
+          land: createdRegion.land,
+          beschreibung: null);
+      await db.patchRegion(createdRegion);
+
+      regionen = await db.getRegionen();
+      var editedRegion =
+          regionen.firstWhere((element) => element.id == createdId);
+
+      expect(editedRegion.id, createdId);
+      expect(editedRegion.name, 'test-region');
+      expect(editedRegion.land, 'AT');
+      expect(editedRegion.beschreibung, null);
+
+      await db.deleteRegion(editedRegion);
+      regionen = await db.getRegionen();
+      expect(regionen.any((element) => element.id == createdId), false,
+          reason: 'Region wurde nicht gelöscht');
+    });
+
+    test('Add a Sorte and make sure it is saved, then delete it again',
+        () async {
       var sorten = await db.getSorten();
       final sorte = SorteModel(
         id: 0,
@@ -109,24 +159,32 @@ void main() {
       var createdId = await db.postSorte(sorte);
 
       sorten = await db.getSorten();
-      expect(sorten.any((element) => element.id == createdId), true, reason: 'Sorte existiert nicht');
-      var createdSorte = sorten.where((element) => element.id == createdId).first;
-      expect(createdSorte.name, 'TEST-SORTE ⚙🦷🎡', reason: 'Name stimmt nicht überein');
-      expect(createdSorte.farbe, WeinFarbe.orange, reason: 'Farbe stimmt nicht überein');
+      expect(sorten.any((element) => element.id == createdId), true,
+          reason: 'Sorte existiert nicht');
+      var createdSorte =
+          sorten.where((element) => element.id == createdId).first;
+      expect(createdSorte.name, 'TEST-SORTE ⚙🦷🎡',
+          reason: 'Name stimmt nicht überein');
+      expect(createdSorte.farbe, WeinFarbe.orange,
+          reason: 'Farbe stimmt nicht überein');
       expect(createdSorte.id, createdId, reason: 'ID stimmt nicht überein');
 
-      createdSorte = createdSorte.copyWith(name: 'test-sorte', farbe: WeinFarbe.rose);
+      createdSorte =
+          createdSorte.copyWith(name: 'test-sorte', farbe: WeinFarbe.rose);
       await db.patchSorte(createdSorte);
 
       sorten = await db.getSorten();
       var editedSorte = sorten.firstWhere((element) => element.id == createdId);
 
-      expect(editedSorte.name, 'test-sorte', reason: 'Name stimmt nicht überein');
-      expect(editedSorte.farbe, WeinFarbe.rose, reason: 'Farbe stimmt nicht überein');
+      expect(editedSorte.name, 'test-sorte',
+          reason: 'Name stimmt nicht überein');
+      expect(editedSorte.farbe, WeinFarbe.rose,
+          reason: 'Farbe stimmt nicht überein');
 
       await db.deleteSorte(editedSorte);
       sorten = await db.getSorten();
-      expect(sorten.any((element) => element.id == createdId), false, reason: 'Sorte wurde nicht gelöscht');
+      expect(sorten.any((element) => element.id == createdId), false,
+          reason: 'Sorte wurde nicht gelöscht');
     });
   });
 
