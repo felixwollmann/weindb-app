@@ -186,7 +186,57 @@ void main() {
       expect(sorten.any((element) => element.id == createdId), false,
           reason: 'Sorte wurde nicht gelöscht');
     });
-  });
 
-  // TODO: Weitere Tests für die delete-Sachen
+    test('Add a Weinbauer and make sure it is saved, then delete it again',
+        () async {
+      var weinbauern = await db.getWeinbauern();
+      var region = (await db.getRegionen()).first;
+      final weinbauer = WeinbauerModel(
+        id: 0,
+        name: 'TEST-Weinbauer',
+        region: region,
+        beschreibung: "Hallo",
+      );
+
+      var createdId = await db.postWeinbauer(weinbauer);
+
+      expect(weinbauern.any((element) => element.id == createdId), false,
+          reason: 'Weinbauer existiert schon, obwohl er es noch nicht sollte');
+      weinbauern = await db.getWeinbauern();
+      expect(weinbauern.any((element) => element.id == createdId), true,
+          reason: 'Weinbauer existiert nicht');
+      var createdWeinbauer =
+          weinbauern.firstWhere((element) => element.id == createdId);
+
+      expect(createdWeinbauer.id, createdId);
+      expect(createdWeinbauer.name, 'TEST-Weinbauer');
+      expect(createdWeinbauer.region, region);
+      expect(createdWeinbauer.beschreibung, 'Hallo');
+
+      region = (await db.getRegionen()).last;
+
+      // copyWith does can't set values to null
+      createdWeinbauer = WeinbauerModel(
+          id: createdWeinbauer.id,
+          name: 'test-weinbauer-2',
+          region: region,
+          beschreibung: null);
+      await db.patchWeinbauer(createdWeinbauer);
+
+      weinbauern = await db.getWeinbauern();
+      var editedWeinbauer =
+          weinbauern.firstWhere((element) => element.id == createdId);
+
+      expect(editedWeinbauer.id, createdId);
+      expect(editedWeinbauer.name, 'test-weinbauer-2');
+      expect(editedWeinbauer.region, region);
+      expect(editedWeinbauer.beschreibung, null);
+
+
+      await db.deleteWeinbauer(editedWeinbauer);
+      weinbauern = await db.getWeinbauern();
+      expect(weinbauern.any((element) => element.id == createdId), false,
+          reason: 'Region wurde nicht gelöscht');
+    });
+  });
 }
