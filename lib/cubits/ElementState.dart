@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 /// Represents the State of either a Wein, a Sorte, a Region or a Weinbauer
 class ElementState<T> extends Equatable {
   /// Whether the element is currently reloading from the database
-  final bool isReloading;
+  final bool isLoading;
 
   /// Whether the element is currently initially loading from the database
   /// 
@@ -20,7 +20,7 @@ class ElementState<T> extends Equatable {
   final List<T> data;
 
   ElementState({
-    this.isReloading = false,
+    this.isLoading = false,
     this.isError = false,
     this.data = const [],
     this.isInitializing = false,
@@ -28,13 +28,13 @@ class ElementState<T> extends Equatable {
 
   // copyWith
   ElementState<T> copyWith({
-    bool? isReloading,
+    bool? isLoading,
     bool? isError,
     List<T>? data,
     bool? isInitializing,
   }) {
     return ElementState<T>(
-      isReloading: isReloading ?? this.isReloading,
+      isLoading: isLoading ?? this.isLoading,
       isError: isError ?? this.isError,
       data: data ?? this.data,
       isInitializing: isInitializing ?? this.isInitializing,
@@ -44,7 +44,7 @@ class ElementState<T> extends Equatable {
   // props for equatable
   @override
   List<Object?> get props => [
-        isReloading,
+        isLoading,
         isError,
         data,
         isInitializing,

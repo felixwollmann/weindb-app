@@ -15,7 +15,7 @@ void main() {
     });
     test('with custom values', () {
       var state = ElementState(
-        isReloading: true,
+        isLoading: true,
         isInitializing: false,
         isError: false,
         data: <SorteModel>[
@@ -23,7 +23,7 @@ void main() {
         ],
       );
       var state2 = ElementState(
-        isReloading: true,
+        isLoading: true,
         isInitializing: false,
         isError: false,
         data: <SorteModel>[
@@ -37,7 +37,7 @@ void main() {
     });
     test('with copyWith-Method', () {
       var state = ElementState(
-        isReloading: false,
+        isLoading: false,
         isInitializing: true,
         isError: true,
         data: <SorteModel>[
