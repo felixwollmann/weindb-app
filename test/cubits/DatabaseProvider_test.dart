@@ -236,7 +236,7 @@ void main() {
       await db.deleteWeinbauer(editedWeinbauer);
       weinbauern = await db.getWeinbauern();
       expect(weinbauern.any((element) => element.id == createdId), false,
-          reason: 'Region wurde nicht gelöscht');
+          reason: 'Weinbauer wurde nicht gelöscht');
     });
   });
 }
