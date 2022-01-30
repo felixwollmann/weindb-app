@@ -199,7 +199,7 @@ class DatabaseProvider extends DatabaseProviderBase {
   @override
   Future<int> postRegion(RegionModel region) async {
     final http.Response response = await client.post(
-      sorteURL,
+      regionURL,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
