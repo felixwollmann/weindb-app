@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:weindb/cubits/DatabaseProvider.dart';
-import 'package:weindb/cubits/DatabaseProviderBase.dart';
-import 'package:weindb/cubits/ElementState.dart';
+// import 'package:weindb/cubits/DatabaseProviderBase.dart';
+// import 'package:weindb/cubits/ElementState.dart';
 import 'package:weindb/cubits/WeinCubit.dart';
 import 'package:weindb/models/models.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -18,7 +18,7 @@ void main() {
   });
 
   group('Weincubit-Stream', () {
-    WeinCubit weinCubit = new WeinCubit(db);
+    // WeinCubit weinCubit = new WeinCubit(db);
 
     late WeinModel addedWein;
     late WeinModel updatedWein;
@@ -26,8 +26,9 @@ void main() {
 
     blocTest(
       'save Wein',
-      build: () => weinCubit,
+      build: () => WeinCubit(db),
       act: (WeinCubit cubit) async {
+        await cubit.awaitInitialization;
         final sorte = (await db.getSorten())[1];
         final weinbauer = (await db.getWeinbauern())[1];
         final jetzt = DateTime.now();
@@ -56,8 +57,9 @@ void main() {
 
     blocTest(
       'edit Wein',
-      build: () => weinCubit,
+      build: () => WeinCubit(db),
       act: (WeinCubit cubit) async {
+        await cubit.awaitInitialization;
         final wein = addedWein.copyWith(
           name: 'TEST-WEIN-2',
         );
@@ -72,11 +74,12 @@ void main() {
         expect(data, isNot(contains(addedWein)));
       },
     );
-
+    
     blocTest(
       'reload, and make sure it is still there',
-      build: () => weinCubit,
+      build: () => WeinCubit(db),
       act: (WeinCubit cubit) async {
+        await cubit.awaitInitialization;
         await cubit.reload();
 
         reloadedWein = cubit.state.data
@@ -111,8 +114,9 @@ void main() {
 
     blocTest(
       'delete Wein',
-      build: () => weinCubit,
+      build: () => WeinCubit(db),
       act: (WeinCubit cubit) async {
+        await cubit.awaitInitialization;
         await cubit.remove(reloadedWein);
         // await cubit.change(wein);
         // updatedWein = cubit.state.data.firstWhere((element) => element.id == wein.id);
