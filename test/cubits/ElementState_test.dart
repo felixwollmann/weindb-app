@@ -36,7 +36,7 @@ void main() {
       expect(state == state2, true);
     });
     test('with copyWith-Method', () {
-      var state = ElementState(
+      var state = ElementState<SorteModel>(
         isLoading: false,
         isInitializing: true,
         isError: true,

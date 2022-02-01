@@ -19,12 +19,25 @@ class ElementState<T> extends Equatable {
   /// A list of [T]
   final List<T> data;
 
+  /// Construct a new [ElementState]
+  /// 
+  /// It is important to specify the type
+  /// ```dart
+  /// // like this
+  /// var state1 = ElementState<WeinModel>(isInitializing: true, isLoading: true, data: [], isError: false);
+  /// // not like this
+  /// var state2 = ElementState(isInitializing: true, isLoading: true, data: [], isError: false);
+  /// 
+  /// state != state2; // true
+  /// 
+  /// // one is ElementState<WeinModel>, the other is ElementState<dynamic>
+  /// ```
   ElementState({
     this.isLoading = false,
     this.isError = false,
-    this.data = const [],
+    data,
     this.isInitializing = false,
-  });
+  }) : this.data = data ?? <T>[]; // nicht gleich oben, da die Liste sonst const sein müsste, und nicht growable wäre
 
   // copyWith
   ElementState<T> copyWith({
