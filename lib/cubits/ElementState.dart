@@ -40,7 +40,7 @@ class ElementState<T> extends Equatable {
   }) : this.data = data ?? <T>[]; // nicht gleich oben, da die Liste sonst const sein müsste, und nicht growable wäre
 
   // copyWith
-  ElementState<T> copyWith({
+  ElementState<T> copyWith<T>({
     bool? isLoading,
     bool? isError,
     List<T>? data,
