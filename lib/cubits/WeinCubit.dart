@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weindb/cubits/CubitBase.dart';
-import 'package:weindb/cubits/DatabaseProvider.dart';
+// import 'package:weindb/cubits/DatabaseProvider.dart';
 import 'package:weindb/cubits/DatabaseProviderBase.dart';
 import 'package:weindb/cubits/ElementState.dart';
 import 'package:weindb/models/models.dart';
@@ -15,30 +15,6 @@ class WeinCubit extends Cubit<ElementState<WeinModel>>
       : super(initialState ?? ElementState<WeinModel>(isInitializing: true)) {
     initialize();
   }
-
-  /// Should be called when [this] is initialized - when it fetched the necessary data from the database.
-  void _completedInitialization() {
-    if (_initializeCompleter.isCompleted) {
-      return;
-    }
-    _initializeCompleter.complete();
-  }
-
-  /// the completer used to signal that the initialization is complete.
-  /// 
-  /// A Completer can be used to create a Future, which can be controlled via Methods, like in this example
-  Completer<void> _initializeCompleter = Completer<void>();
-
-
-
-  /// Future which will complete when the cubit is initialized
-  /// 
-  /// ```dart
-  /// WeinCubit cubit = WeinCubit(db);
-  /// await cubit.awaitInitialization();
-  /// // the cubit is now initialized - it fetched the data from the database
-  /// ```
-  Future<void> get awaitInitialization => _initializeCompleter.future;
 
   @override
   Future<void> change(WeinModel item) async {
@@ -82,7 +58,7 @@ class WeinCubit extends Cubit<ElementState<WeinModel>>
   void initialize() async {
     emit(ElementState<WeinModel>(isInitializing: true));
     await reload();
-    _completedInitialization();
+    completedInitialization();
   }
 
   @override
