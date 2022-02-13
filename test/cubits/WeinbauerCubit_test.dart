@@ -10,10 +10,15 @@ void main() {
   final db = DatabaseProvider(baseURL: "http://192.168.100.10/test/");
 
   group('WeinbauerCubit Unit Tests', () {
-    WeinbauerCubit weinCubit = new WeinbauerCubit(db);
+    // WeinbauerCubit weinbauerCubit = new WeinbauerCubit(db);
     test('Initial State', () {
-      expect(weinCubit.state.isInitializing, equals(true));
-      expect(weinCubit.state.isLoading, equals(true));
+      // if the variable is initilized outside this method, it will already have loaded the data by the time the test runs
+      WeinbauerCubit freshWeinbauerCubit = new WeinbauerCubit(db);
+      
+      expect(freshWeinbauerCubit.state.data, equals(<WeinbauerModel>[]), reason: "weinbauerCubit.state.data");
+      expect(freshWeinbauerCubit.state.isInitializing, equals(true), reason: "weinbauerCubit.state.isInitializing");
+      expect(freshWeinbauerCubit.state.isLoading, equals(true), reason: "weinbauerCubit.state.isLoading");
+      expect(freshWeinbauerCubit.state.isError, equals(false), reason: "weinbauerCubit.state.isError");
     });
   });
 
@@ -25,7 +30,7 @@ void main() {
     late WeinbauerModel reloadedWeinbauer;
 
     blocTest(
-      'save Wein',
+      'save Weinbauer',
       build: () => WeinbauerCubit(db),
       act: (WeinbauerCubit cubit) async {
         await cubit.awaitInitialization;

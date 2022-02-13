@@ -14,6 +14,7 @@ void main() {
     test('Initial State', () {
       expect(weinCubit.state.isInitializing, equals(true));
       expect(weinCubit.state.isLoading, equals(true));
+      expect(weinCubit.state.isError, equals(false));
     });
   });
 
@@ -74,7 +75,7 @@ void main() {
         expect(data, isNot(contains(addedWein)));
       },
     );
-    
+
     blocTest(
       'reload, and make sure it is still there',
       build: () => WeinCubit(db),
