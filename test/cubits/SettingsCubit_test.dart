@@ -6,7 +6,7 @@ import 'package:weindb/cubits/SettingsState.dart';
 import 'package:bloc_test/bloc_test.dart';
 
 // writing this took an enourmous amount of time, since
-// a Mock Storage needed to be used, and I didn't have any 
+// a Mock Storage needed to be used, and I didn't have any
 // idea how to do that
 
 // here are a few things that are helpful for understanding this
@@ -19,14 +19,28 @@ import 'package:bloc_test/bloc_test.dart';
 void main() async {
   group('Settings-Cubit', () {
     blocTest(
-      'sae',
+      'saves values and reads them again',
       build: () => mockHydratedStorage(() => SettingsCubit()),
       act: (SettingsCubit cubit) async {
         cubit.setKey('hello', 'world');
         cubit.setKey('a number', 1234);
       },
-    expect: () => [SettingsState({'hello': 'world', 'a number': 1234})],
+      expect: () => [
+        SettingsState({'hello': 'world', 'a number': 1234})
+      ],
     );
+
+    test('toJson and fromJson', () {
+      mockHydratedStorage(() {
+        final cubit = SettingsCubit();
+        cubit.setKey('hello', 'world');
+        cubit.setKey('a number', 1234);
+        final state = cubit.state;
+        final json = cubit.toJson(state);
+        final state2 = cubit.fromJson(json);
+        expect(state, state2);
+      });
+    });
   });
 }
 
