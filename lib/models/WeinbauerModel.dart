@@ -56,4 +56,9 @@ class WeinbauerModel extends Equatable {
     region: region ?? this.region,
     beschreibung: beschreibung ?? this.beschreibung,
   );
+
+  @override
+  String toString() {
+    return name;
+  }
 }

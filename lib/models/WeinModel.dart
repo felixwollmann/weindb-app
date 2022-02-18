@@ -134,4 +134,10 @@ class WeinModel extends Equatable {
         fach: fach ?? this.fach,
         preis: preis ?? this.preis,
       );
+
+
+  @override
+  String toString() {
+    return '${sorte.name} $name';
+  }
 }

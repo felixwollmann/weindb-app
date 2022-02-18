@@ -47,4 +47,9 @@ class RegionModel extends Equatable {
         beschreibung: beschreibung ?? this.beschreibung,
       );
 
+  @override
+  String toString() {
+    return name;
+  }
+
 }

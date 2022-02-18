@@ -114,5 +114,15 @@ void main() {
         'farbe': 3,
       });
     });
+
+    test('toString', () {
+            final sorte = SorteModel(
+        id: 1,
+        name: 'MeineSorte',
+        farbe: WeinFarbe.red,
+      );
+
+      expect('$sorte', 'MeineSorte');
+    });
   });
 }

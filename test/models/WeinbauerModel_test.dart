@@ -67,11 +67,10 @@ void main() {
       final weinbauerFromJson = WeinbauerModel.fromJson(json);
 
       final weinbauer = WeinbauerModel(
-        id: 1,
-        name: 'Weinbauer',
-        region: RegionModel(id: 1, name: 'Region', land: 'AT'),
-        beschreibung: 'Beschreibung'
-      );
+          id: 1,
+          name: 'Weinbauer',
+          region: RegionModel(id: 1, name: 'Region', land: 'AT'),
+          beschreibung: 'Beschreibung');
 
       expect(weinbauerFromJson, weinbauer);
     });
@@ -85,13 +84,21 @@ void main() {
       };
 
       final weinbauer = WeinbauerModel(
-        id: 1,
-        name: 'Weinbauer',
-        region: RegionModel(id: 1, name: 'Region', land: 'AT'),
-        beschreibung: 'Beschreibung'
-      );
+          id: 1,
+          name: 'Weinbauer',
+          region: RegionModel(id: 1, name: 'Region', land: 'AT'),
+          beschreibung: 'Beschreibung');
 
       expect(weinbauer.toJson(), json);
+    });
+
+    test('toString', () {
+      final weinbauer = WeinbauerModel(
+        id: 1,
+        name: 'Weinbauer',
+      );
+      
+      expect('$weinbauer', 'Weinbauer');
     });
   });
 }

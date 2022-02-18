@@ -59,8 +59,6 @@ void main() {
       expect(sorte2.name, 'MeineRegion2');
       expect(sorte2.land, 'DE');
       expect(sorte2.beschreibung, 'Meine Beschreibung');
-
-      // TODO: Was passiert bei einem ungültigen JSON?
     });
 
     test('toJson', () {
@@ -70,12 +68,8 @@ void main() {
         land: 'AT',
       );
 
-      expect(region1.toJson(), {
-        'id': 1,
-        'name': 'MeineRegion',
-        'land': 'AT',
-        'beschreibung': null
-      });
+      expect(region1.toJson(),
+          {'id': 1, 'name': 'MeineRegion', 'land': 'AT', 'beschreibung': null});
 
       final region2 = RegionModel(
         id: 2,
@@ -90,6 +84,16 @@ void main() {
         'land': 'DE',
         'beschreibung': 'Meine Beschreibung',
       });
+    });
+
+    test('toString', () {
+      final region = RegionModel(
+        id: 1,
+        name: 'MeineRegion',
+        land: 'AT',
+      );
+
+      expect('$region', 'MeineRegion');
     });
   });
 }

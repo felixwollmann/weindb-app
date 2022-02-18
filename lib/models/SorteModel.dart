@@ -40,4 +40,9 @@ class SorteModel extends Equatable {
     );
   }
 
+  @override
+  String toString() {
+    return name;
+  }
+
 }

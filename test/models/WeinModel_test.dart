@@ -176,5 +176,27 @@ void main() {
 
       expect(wein.toJson(), json);
     });
+
+    test('toString', () {
+            final wein = WeinModel(
+        id: 1,
+        name: 'Wein',
+        sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
+        anzahl: 1,
+        getrunken: 1,
+        jahr: 2020,
+        weinbauer: WeinbauerModel(
+            id: 1,
+            name: 'Weinbauer',
+            region: RegionModel(id: 1, name: 'Region', land: 'AT'),
+            beschreibung: 'Beschreibung'),
+        beschreibung: 'Beschreibung',
+        inhalt: 0.75,
+        fach: 10,
+        preis: 10.0,
+      );
+
+      expect('$wein', equals('Sorte Wein'));
+    });
   });
 }
