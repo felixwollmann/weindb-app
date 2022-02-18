@@ -10,8 +10,9 @@ void main() {
   final db = DatabaseProvider(baseURL: "http://192.168.100.10/test/");
 
   group('WeinCubit Unit Tests', () {
-    WeinCubit weinCubit = new WeinCubit(db);
     test('Initial State', () {
+      WeinCubit weinCubit = new WeinCubit(db);
+
       expect(weinCubit.state.isInitializing, equals(true));
       expect(weinCubit.state.isLoading, equals(true));
       expect(weinCubit.state.isError, equals(false));
@@ -106,7 +107,7 @@ void main() {
         expect(wein.fach, equals(updatedWein.fach));
         expect(wein.preis, equals(updatedWein.preis));
         expect(wein.gekauft!.difference(updatedWein.gekauft!).inMilliseconds,
-            inExclusiveRange(-900, 900));
+            inExclusiveRange(-1000, 1000));
 
         // expect(data, contains(updatedWein));
         // expect(data, isNot(contains(addedWein)));
