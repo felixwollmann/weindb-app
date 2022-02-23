@@ -21,9 +21,9 @@ import 'package:google_fonts/google_fonts.dart';
 // https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=C2185B&secondary.color=0D47A1
 final ColorScheme colorSchemeLight = ColorScheme.light(
   primary: Colors.pink[700]!,
-  primaryVariant: Color(0xFF8c0032),
+  primaryContainer: Color(0xFF8c0032),
   secondary: Colors.blue[900]!,
-  secondaryVariant: Color(0xFF002171),
+  secondaryContainer: Color(0xFF002171),
   surface: Colors.white,
   background: Colors.black,
   error: Color(0xFFB00020),
@@ -37,9 +37,9 @@ final ColorScheme colorSchemeLight = ColorScheme.light(
 
 final ColorScheme colorSchemeDark = ColorScheme.dark(
   primary: Colors.pink[700]!,
-  primaryVariant: Color(0xFF8c0032),
+  primaryContainer: Color(0xFF8c0032),
   secondary: Colors.blue[900]!,
-  secondaryVariant: Color(0xFF002171),
+  secondaryContainer: Color(0xFF002171),
   // surface: Colors.white,
   // background: Colors.black,
   // error: Color(0xFFB00020),
@@ -89,9 +89,9 @@ ThemeData theme(
       brightness: colorScheme.brightness,
       colorScheme: colorScheme,
       primaryColor: colorScheme.primary,
-      primaryColorBrightness:
-          ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      primaryColorDark: colorScheme.primaryVariant,
+      // primaryColorBrightness:
+      //     ThemeData.estimateBrightnessForColor(colorScheme.primary),
+      primaryColorDark: colorScheme.primaryContainer,
       // accentColor: colorScheme.secondary,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedIconTheme:
