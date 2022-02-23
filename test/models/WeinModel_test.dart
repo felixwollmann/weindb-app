@@ -178,7 +178,7 @@ void main() {
     });
 
     test('toString', () {
-            final wein = WeinModel(
+      final wein = WeinModel(
         id: 1,
         name: 'Wein',
         sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
@@ -197,6 +197,48 @@ void main() {
       );
 
       expect('$wein', equals('Sorte Wein'));
+    });
+
+    test('available-Getter', () {
+      final wein = WeinModel(
+        id: 1,
+        name: 'Wein',
+        sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
+        anzahl: 1,
+        getrunken: 1,
+        jahr: 2020,
+        weinbauer: WeinbauerModel(
+            id: 1,
+            name: 'Weinbauer',
+            region: RegionModel(id: 1, name: 'Region', land: 'AT'),
+            beschreibung: 'Beschreibung'),
+        beschreibung: 'Beschreibung',
+        inhalt: 0.75,
+        fach: 10,
+        preis: 10.0,
+      );
+
+      expect(wein.available, true);
+
+      final wein2 = WeinModel(
+        id: 1,
+        name: 'Wein',
+        sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
+        anzahl: 0,
+        getrunken: 1,
+        jahr: 2020,
+        weinbauer: WeinbauerModel(
+            id: 1,
+            name: 'Weinbauer',
+            region: RegionModel(id: 1, name: 'Region', land: 'AT'),
+            beschreibung: 'Beschreibung'),
+        beschreibung: 'Beschreibung',
+        inhalt: 0.75,
+        fach: 10,
+        preis: 10.0,
+      );
+
+      expect(wein2.available, false);
     });
   });
 }

@@ -140,4 +140,7 @@ class WeinModel extends Equatable {
   String toString() {
     return '${sorte.name} $name';
   }
+
+  /// Whether the wine is available ([anzahl] is greater than 0)
+  bool get available => anzahl > 0;
 }
