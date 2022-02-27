@@ -31,10 +31,10 @@ class _HomeState extends State<Home> {
           WeinModel(
             id: 1,
             name: 'Wein',
-            sorte: SorteModel(id: 1, name: 'Sorte', farbe: WeinFarbe.red),
-            anzahl: 1,
+            sorte: SorteModel(id: 1, name: 'Sorte', farbe: number % 2 == 0 ? WeinFarbe.red : WeinFarbe.white),
+            anzahl: number,
             getrunken: 1,
-            jahr: 2020,
+            jahr: 2020 - number,
             weinbauer: WeinbauerModel(
                 id: 1,
                 name: 'Weinbauer',
