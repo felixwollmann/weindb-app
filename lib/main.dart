@@ -73,8 +73,8 @@ class App extends StatelessWidget {
         // ),
       ],
       child: MaterialApp(
-        theme: theme.themeDataLight,
-        darkTheme: theme.themeDataDark,
+        theme: theme.theme(Brightness.light),
+        darkTheme: theme.theme(Brightness.dark),
         themeMode: ThemeMode.system,
         title: 'Wein-Datenbank',
         home: home.Page(),

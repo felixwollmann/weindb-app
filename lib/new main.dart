@@ -26,17 +26,15 @@ void main() async {
   );
 }
 
-
 class App extends StatelessWidget {
-  const App
-({ Key? key }) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wein-Datenbank',
-      theme: theme.themeDataLight,
-      darkTheme: theme.themeDataDark,
+      theme: theme.theme(Brightness.light),
+      darkTheme: theme.theme(Brightness.dark),
       themeMode: ThemeMode.system,
       home: Home(),
       // routes: {
@@ -95,8 +93,8 @@ class _OldApp extends StatelessWidget {
         // ),
       ],
       child: MaterialApp(
-        theme: theme.themeDataLight,
-        darkTheme: theme.themeDataDark,
+        theme: theme.theme(Brightness.light),
+        darkTheme: theme.theme(Brightness.dark),
         themeMode: ThemeMode.system,
         title: 'Wein-Datenbank',
         home: home.Page(),

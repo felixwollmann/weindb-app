@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weindb/theme/constants.dart';
 
 class SmallCard extends StatelessWidget {
   const SmallCard({
@@ -17,7 +18,7 @@ class SmallCard extends StatelessWidget {
     var textTheme = theme.textTheme;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Container(
         padding: const EdgeInsets.fromLTRB(10, 16, 10, 10),
         child: Column(
@@ -40,10 +41,10 @@ class SmallCard extends StatelessWidget {
                 child: Text(
                   subtitle,
                   maxLines: 1,
-                  style: textTheme.displayMedium!.copyWith(
+                  style: textTheme.subtitle2!.copyWith(
                     // color: theme.textTheme.,
                     // fontWeight: FontWeight.w900,
-                    fontSize: 15,
+                    fontSize: 17,
                   ),
                 ),
               ),
@@ -51,7 +52,7 @@ class SmallCard extends StatelessWidget {
           ],
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(kBorderRadius),
           color: cardColor,
         ),
       ),
