@@ -28,7 +28,7 @@ abstract class CubitBase<T> {
   /// the completer used to signal that the initialization is complete.
   /// 
   /// A Completer can be used to create a Future, which can be controlled via Methods, like in this example
-  Completer<void> _initializeCompleter = Completer<void>();
+  final Completer<void> _initializeCompleter = Completer<void>();
 
 
 
