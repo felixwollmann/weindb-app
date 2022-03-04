@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:weindb/theme/constants.dart';
 
 // final ColorScheme colorSchemeLight = ColorScheme(
 //   // bis jetzt nur das Material Color Scheme
@@ -86,16 +87,18 @@ ThemeData theme(
     brightness: brightness,
 
     // primary: Colors.pink[700]!,
-    primary: isDark ? Color(0xFF574AE2) : Color(0xFFEE2677),
-    primaryContainer: Color(0xFF8c0032),
+    primary: isDark ? const Color(0xFF574AE2) : const Color(0xFFEE2677),
+    primaryContainer: isDark ? const Color.fromARGB(73, 87, 74, 226) : const Color.fromARGB(255, 255, 199, 222),
+    onPrimaryContainer: isDark ? Colors.white : Colors.black,
     // secondary: Color(0xFFF9DC5C),
     // secondary: Color(0xFF47A8BD),
     // secondary: Color(0xFFFF85A3),
-    secondary: isDark ? Color(0xff2C0735) : Color(0xFFFF4D79),
-    secondaryContainer: Color(0xFF002171),
-    surface: isDark ? Color.fromRGBO(40, 40, 40, 1) : Colors.white,
-    background: isDark ? Color.fromRGBO(20, 20, 20, 1) : Colors.grey[100]!,
-    error: Color(0xFFB00020),
+    secondary: isDark ? const Color(0xff2C0735) : const Color(0xFFFF4D79),
+    secondaryContainer: const Color(0xFF002171),
+    surface: isDark ? const Color.fromRGBO(40, 40, 40, 1) : Colors.white,
+    surfaceVariant: isDark ? const Color.fromRGBO(60, 60, 60, 1) : Colors.grey[200]!,
+    background: isDark ? const Color.fromRGBO(20, 20, 20, 1) : Colors.grey[100]!,
+    error: const Color(0xFFB00020),
     onPrimary: Colors.white,
     onSecondary: Colors.white,
     onSurface: isDark ? Colors.white : Colors.black,
@@ -126,7 +129,9 @@ ThemeData theme(
   final bool secondaryIsLight = Brightness.light ==
       ThemeData.estimateBrightnessForColor(colorScheme.secondary);
 
-  TextTheme textTheme = (isDark ? Typography.whiteMountainView : Typography.blackMountainView).copyWith(
+  TextTheme textTheme =
+      (isDark ? Typography.whiteMountainView : Typography.blackMountainView)
+          .copyWith(
     headline1: GoogleFonts.poppins(
       fontSize: 93,
       fontWeight: FontWeight.w300,
@@ -190,6 +195,14 @@ ThemeData theme(
   );
 
   return ThemeData(
+    cardTheme: CardTheme(
+      margin: const EdgeInsets.all(0),
+      elevation: 0,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(kBorderRadius),
+      )
+    ),
     scaffoldBackgroundColor: colorScheme.background,
     cardColor: colorScheme.surface,
     brightness: brightness,
@@ -205,7 +218,7 @@ ThemeData theme(
       selectedIconTheme: IconThemeData(size: 30, color: colorScheme.primary),
       selectedItemColor: colorScheme.primary,
     ),
-    snackBarTheme: SnackBarThemeData(
+    snackBarTheme: const SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
       // elevation: 100,
     ),

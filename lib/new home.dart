@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                 id: 1,
                 name: 'Weinbauer',
                 region: RegionModel(id: 1, name: 'Region', land: 'AT'),
-                beschreibung: 'Beschreibung'),
+                beschreibung: 'Beschreibung des Weinguts'),
             beschreibung: 'Beschreibung',
             inhalt: 0.75,
             fach: 10,

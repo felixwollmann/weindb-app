@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:weindb/theme/constants.dart';
 import 'package:weindb/widgets/InformationDisplay.dart';
-import 'package:weindb/widgets/WeinAvailabilityDisplay.dart';
+import 'package:weindb/widgets/expandable_sorte.dart';
+import 'package:weindb/widgets/expandable_weinbauer.dart';
+import 'package:weindb/widgets/wein_availibility_display.dart';
 
 import '../../models/models.dart';
 import '../SmallCard.dart';
@@ -64,20 +67,30 @@ class WeinPage extends StatelessWidget {
                       title: weinModel.fach.toString(),
                       subtitle: 'Fach',
                     ),
-                    WeinAwavilibityDisplay(drunken: weinModel.getrunken, available: weinModel.anzahl),
-                    InformationDisplay(),
-                    Placeholder(fallbackHeight: 1000,)
-                    // Expanded(
-                    //   child: Container(
-                    //     child: Text(weinModel.anzahl.toString()),
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       color: cardColor,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
+                WeinAvailabilityDisplay(
+                    drunken: weinModel.getrunken, available: weinModel.anzahl),
+                const SizedBox(height: kDefaultPadding),
+                if (weinModel.weinbauer != null)
+                  ExpandableWeinbauer(weinbauer: weinModel.weinbauer!),
+                const SizedBox(height: kDefaultPadding),
+                ExpandableSorte(sorte: weinModel.sorte),
+                const SizedBox(height: kDefaultPadding),
+                // const SizedBox(height: 100,),
+                InformationDisplay(),
+                Placeholder(
+                  fallbackHeight: 1000,
+                )
+                // Expanded(
+                //   child: Container(
+                //     child: Text(weinModel.anzahl.toString()),
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(8),
+                //       color: cardColor,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
