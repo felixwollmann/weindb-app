@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/constants.dart';
 
-class WeinAwavilibityDisplay extends StatelessWidget {
-  const WeinAwavilibityDisplay(
+class WeinAvailabilityDisplay extends StatelessWidget {
+  const WeinAvailabilityDisplay(
       {required this.drunken, required this.available, Key? key})
       : super(key: key);
 
@@ -49,7 +49,7 @@ class WeinAwavilibityDisplay extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Row(
@@ -58,7 +58,7 @@ class WeinAwavilibityDisplay extends StatelessWidget {
                 'Verfügbar',
                 style: theme.textTheme.subtitle2,
               ),
-              Spacer(),
+              const Spacer(),
               Text('Getrunken', style: theme.textTheme.subtitle2),
             ],
           )
