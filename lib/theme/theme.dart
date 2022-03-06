@@ -104,6 +104,8 @@ ThemeData theme(
     onSurface: isDark ? Colors.white : Colors.black,
     onBackground: isDark ? Colors.white : Colors.black,
     onError: Colors.white,
+    tertiary: isDark ? Colors.lightGreen[900] : Colors.lightGreen[700],
+    onTertiary: Colors.white,
   );
 
   // const ColorScheme colorSchemeDark = ColorScheme.dark(
@@ -195,6 +197,10 @@ ThemeData theme(
   );
 
   return ThemeData(
+    dividerTheme: DividerThemeData(
+      color: colorScheme.secondary,
+      thickness: 3,
+    ),
     cardTheme: CardTheme(
       margin: const EdgeInsets.all(0),
       elevation: 0,
