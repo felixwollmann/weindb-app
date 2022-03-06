@@ -22,33 +22,37 @@ class ExpandableBase extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-            dividerColor: Theme.of(context).cardColor,
-            dividerTheme: Theme.of(context)
-                .dividerTheme
-                .copyWith(thickness: 0, color: Colors.transparent)),
-        child: Card(
-          margin: EdgeInsets.zero,
-          clipBehavior: Clip.antiAlias,
-          child: ExpansionTile(
-            // trailing: trailing,
-            title: Text(title),
-            subtitle: Text(subtitle),
-            leading: Icon(icon),
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            expandedAlignment: Alignment.topLeft,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                    left: kDefaultPadding, right: kDefaultPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: children,
+      child: Card(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent,
+              dividerTheme: Theme.of(context).dividerTheme.copyWith(
+                    thickness: 0,
+                    color: Colors.transparent,
+                    space: 0,
+                    indent: 0,
+                    endIndent: 0,
+                  )),
+            child: ExpansionTile(
+              // trailing: trailing,
+              title: Text(title),
+              subtitle: Text(subtitle),
+              leading: Icon(icon),
+              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+              expandedAlignment: Alignment.topLeft,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: kDefaultPadding, right: kDefaultPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
         ),
       ),
     );

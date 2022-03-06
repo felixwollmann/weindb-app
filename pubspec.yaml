@@ -39,6 +39,7 @@ dependencies:
   bloc_test: ^9.0.2
   hydrated_bloc: ^8.0.0
   animations: ^2.0.2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.9.1

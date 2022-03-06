@@ -8,6 +8,7 @@ class ActionButton extends StatelessWidget {
     required this.icon,
     this.state = ActionButtonState.standard,
     required this.onTap,
+    this.isFilled = false,
   }) : super(key: key);
 
   final String label;
@@ -15,12 +16,15 @@ class ActionButton extends StatelessWidget {
   final ActionButtonState state;
   final void Function() onTap;
 
+  final bool isFilled;
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var onPrimary = theme.colorScheme.onPrimary;
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding:
+          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 0),
       child: AnimatedContainer(
         duration: kdAnimation,
         decoration: BoxDecoration(
@@ -28,8 +32,16 @@ class ActionButton extends StatelessWidget {
               ? theme.colorScheme.errorContainer
               : (state == ActionButtonState.completed)
                   ? theme.colorScheme.tertiary
-                  : theme.primaryColor,
+                  : (isFilled || state != ActionButtonState.standard
+                      ? theme.primaryColor
+                      : theme.colorScheme.surface),
           borderRadius: BorderRadius.circular(kBorderRadius),
+          border: (!isFilled && state == ActionButtonState.standard)
+              ? Border.all(
+                  color: theme.primaryColor,
+                  width: 4,
+                )
+              : null,
         ),
         height: 60,
         alignment: Alignment.center,
@@ -41,46 +53,54 @@ class ActionButton extends StatelessWidget {
             child: SizedBox.expand(
               child: Align(
                 alignment: Alignment.center,
-                child: (state == ActionButtonState.standard)
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            icon,
-                            color: theme.colorScheme.onPrimary,
-                          ),
-                          const SizedBox(width: kDefaultPadding),
-                          Text(
-                            label,
-                            style: theme.textTheme.titleLarge!
-                                .copyWith(color: theme.colorScheme.onPrimary),
-                          ),
-                        ],
-                      )
-                    : (state == ActionButtonState.error
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.error,
-                                color: theme.colorScheme.onErrorContainer,
-                              ),
-                              const SizedBox(width: kDefaultPadding),
-                              Text(
-                                'Fehler',
-                                style: theme.textTheme.titleLarge!.copyWith(
-                                    color: theme.colorScheme.onErrorContainer),
-                              ),
-                            ],
-                          )
-                        : (state == ActionButtonState.completed
-                            ? Icon(
-                                Icons.check,
-                                color: theme.colorScheme.onTertiary,
-                              )
-                            : CircularProgressIndicator(
-                                color: onPrimary,
-                              ))),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: (state == ActionButtonState.standard)
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              icon,
+                              color: isFilled
+                                  ? theme.colorScheme.onPrimary
+                                  : theme.colorScheme.onSurface,
+                            ),
+                            const SizedBox(width: kDefaultPadding),
+                            Text(
+                              label,
+                              style: theme.textTheme.titleLarge!.copyWith(
+                                  color: isFilled
+                                      ? theme.colorScheme.onPrimary
+                                      : theme.colorScheme.onSurface),
+                            ),
+                          ],
+                        )
+                      : (state == ActionButtonState.error
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.error,
+                                  color: theme.colorScheme.onErrorContainer,
+                                ),
+                                const SizedBox(width: kDefaultPadding),
+                                Text(
+                                  'Fehler',
+                                  style: theme.textTheme.titleLarge!.copyWith(
+                                      color:
+                                          theme.colorScheme.onErrorContainer),
+                                ),
+                              ],
+                            )
+                          : (state == ActionButtonState.completed
+                              ? Icon(
+                                  Icons.check,
+                                  color: theme.colorScheme.onTertiary,
+                                )
+                              : CircularProgressIndicator(
+                                  color: onPrimary,
+                                ))),
+                ),
               ),
             ),
           ),

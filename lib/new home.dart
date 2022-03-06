@@ -43,6 +43,7 @@ class _HomeState extends State<Home> {
             beschreibung: 'Beschreibung',
             inhalt: 0.75,
             fach: 10,
+            gekauft: DateTime.now(),
             preis: 10.0,
           ),
 

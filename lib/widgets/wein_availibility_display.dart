@@ -53,13 +53,29 @@ class WeinAvailabilityDisplay extends StatelessWidget {
             height: 4,
           ),
           Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
-                'Verfügbar',
-                style: theme.textTheme.subtitle2,
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Verfügbar',
+                    style: theme.textTheme.subtitle2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ),
-              const Spacer(),
-              Text('Getrunken', style: theme.textTheme.subtitle2),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Getrunken',
+                    style: theme.textTheme.subtitle2,
+                    overflow: TextOverflow.ellipsis,
+
+                  ),
+                ),
+              ),
             ],
           )
         ],
@@ -73,7 +89,8 @@ class WeinAvailabilityDisplay extends StatelessWidget {
       child: Text(
         string,
         style: theme.textTheme.displaySmall!.copyWith(
-          color: isOn ? theme.colorScheme.onPrimary : theme.colorScheme.onSurface,
+          color:
+              isOn ? theme.colorScheme.onPrimary : theme.colorScheme.onSurface,
           fontSize: 25,
         ),
       ),
