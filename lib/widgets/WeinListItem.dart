@@ -7,7 +7,11 @@ import '../models/models.dart';
 import 'MyListItem.dart';
 
 class WeinListItem extends StatelessWidget {
-  const WeinListItem(this.weinModel, {Key? key}) : super(key: key);
+  WeinListItem(this.weinModel, {Key? key, this.onTap})
+      : super(key: key);
+
+  /// If supplied, tapping on the ListTile will call this method. It not, tapping will open the WeinPage for the relevant wine (with an animation).
+  final void Function()? onTap;
 
   final WeinModel weinModel;
   @override
@@ -15,11 +19,12 @@ class WeinListItem extends StatelessWidget {
     final isEnabled = weinModel.available;
 
     return MyListItem(
-      openBuilder: (context, close) => Scaffold(
+      onTap: onTap,
+      openBuilder: onTap == null ? (context, close) => Scaffold(
         body: Center(
           child: WeinPage(weinModel: weinModel),
         ),
-      ),
+      ) : null,
       subtitle: weinModel.weinbauer.toString(),
       title: weinModel.toString(),
       color: WeinFarbenUIColor.getColor(

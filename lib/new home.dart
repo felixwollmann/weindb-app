@@ -10,6 +10,7 @@ import 'package:weindb/theme/components/Things.dart';
 // import 'package:weindb/theme/theme.dart' as theme;
 
 import 'package:weindb/pages/edit/edit.dart';
+import 'package:weindb/theme/constants.dart';
 import 'package:weindb/widgets/WeinListItem.dart';
 
 import 'models/models.dart';
@@ -26,12 +27,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: (_, __) => const SizedBox(height: kDefaultPadding),
         itemBuilder: (context, number) => WeinListItem(
           WeinModel(
             id: 1,
             name: 'Wein',
-            sorte: SorteModel(id: 1, name: 'Sorte', farbe: number % 2 == 0 ? WeinFarbe.red : WeinFarbe.white),
+            sorte: SorteModel(
+                id: 1,
+                name: 'Sorte',
+                farbe: number % 2 == 0 ? WeinFarbe.red : WeinFarbe.white),
             anzahl: number,
             getrunken: 1,
             jahr: 2020 - number,
@@ -46,7 +51,7 @@ class _HomeState extends State<Home> {
             gekauft: DateTime.now(),
             preis: 10.0,
           ),
-
+          // onTap: () {},
         ),
         itemCount: 20,
       ),

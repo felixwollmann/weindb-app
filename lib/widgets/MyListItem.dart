@@ -1,20 +1,28 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:weindb/theme/constants.dart';
 
 import '../theme/WeinFarbenUIColor.dart';
 
 class MyListItem extends StatelessWidget {
-  const MyListItem(
+  MyListItem(
       {Key? key,
-      required this.openBuilder,
+      this.openBuilder,
       this.color,
       required this.title,
       required this.subtitle,
       this.chips = const [],
-      this.enabled = true})
-      : super(key: key);
+      this.enabled = true,
+      void Function()? onTap})
+      : assert(openBuilder != null || onTap != null,
+            'Need to supply at least onTap or openBuilder'),
+        assert(openBuilder == null || onTap == null,
+            'Only supply onTap OR openBuilder - not both'),
+        onTap = onTap ?? (openBuilder != null ? null : () {}),
+        // this.openBuilder = (onTap != null) openBuilder
+        super(key: key);
 
-  final Widget Function(BuildContext, void Function({Never? returnValue}))
+  final Widget Function(BuildContext, void Function({Never? returnValue}))?
       openBuilder;
 
   final Color? color;
@@ -24,66 +32,74 @@ class MyListItem extends StatelessWidget {
 
   final bool enabled;
 
+  // what happens if
+  final void Function()? onTap;
+
   final List<Widget> chips;
 
   @override
   Widget build(BuildContext context) {
     final hasColor = color != null;
 
+    final hasOnTap = onTap != null;
+
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-      child: OpenContainer(
-        closedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        closedColor: Theme.of(context).cardColor,
-        // closedColor: Colors.transparent,
-        openColor: Theme.of(context).scaffoldBackgroundColor,
-        openBuilder: openBuilder,
-        closedBuilder: (context, open) => hasColor
-            ? IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 10,
-                      height: 0,
-                      color: color,
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(title),
-                        enabled: enabled,
-                        onTap: open,
-                        style: ListTileStyle.list,
-                        subtitle: Text(subtitle),
-                        trailing: Container(
-                          constraints: BoxConstraints(maxWidth: 200),
-                          child: Wrap(
-                            children: chips,
-                            spacing: 10,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : ListTile(
-                title: Text(title),
-                enabled: enabled,
-                onTap: open,
-                style: ListTileStyle.list,
-                subtitle: Text(subtitle),
-                trailing: Container(
-                  constraints: BoxConstraints(maxWidth: 200),
-                  child: Wrap(
-                    children: chips,
-                    spacing: 10,
-                  ),
-                ),
+      padding:
+          const EdgeInsets.symmetric(vertical: 0, horizontal: kDefaultPadding),
+      child: hasOnTap
+          ? _wrapInCard(
+              hasColor ? _listTileWithColor(onTap!) : _listTile(onTap!))
+          : OpenContainer(
+              closedElevation: 0,
+              closedShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kBorderRadius),
               ),
+              closedColor: Theme.of(context).cardColor,
+              // closedColor: Colors.transparent,
+              openColor: Theme.of(context).scaffoldBackgroundColor,
+              openBuilder: openBuilder!,
+              closedBuilder: (context, open) =>
+                  hasColor ? _listTileWithColor(open) : _listTile(open)),
+    );
+  }
+
+  Widget _wrapInCard(Widget child) {
+    return Card(child: child);
+  }
+
+  Widget _listTileWithColor(void Function() open) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 10,
+            height: 0,
+            color: color,
+          ),
+          Expanded(
+            child: _listTile(open),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ListTile _listTile(VoidCallback open) {
+    return ListTile(
+      title: Text(title),
+      enabled: enabled,
+      onTap: open,
+      style: ListTileStyle.list,
+      subtitle: Text(subtitle),
+      trailing: Container(
+        constraints: const BoxConstraints(maxWidth: 200),
+        child: Wrap(
+          children: chips,
+          spacing: kDefaultPadding,
+        ),
       ),
     );
   }
