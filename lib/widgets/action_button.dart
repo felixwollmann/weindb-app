@@ -27,6 +27,7 @@ class ActionButton extends StatelessWidget {
           const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 0),
       child: AnimatedContainer(
         duration: kdAnimation,
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: state == ActionButtonState.error
               ? theme.colorScheme.errorContainer
@@ -35,6 +36,9 @@ class ActionButton extends StatelessWidget {
                   : (isFilled || state != ActionButtonState.standard
                       ? theme.primaryColor
                       : theme.colorScheme.surface),
+          borderRadius: BorderRadius.circular(kBorderRadius),
+        ),
+        foregroundDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(kBorderRadius),
           border: (!isFilled && state == ActionButtonState.standard)
               ? Border.all(
@@ -49,7 +53,6 @@ class ActionButton extends StatelessWidget {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(kBorderRadius),
             child: SizedBox.expand(
               child: Align(
                 alignment: Alignment.center,
