@@ -18,5 +18,14 @@
         "statusBarItem.remoteBackground": "#ebc8ec",
         "statusBarItem.remoteForeground": "#15202b"
     },
-    "peacock.color": "#ebc8ec"
+    // from https://gist.github.com/gaetschwartz/b5fed3ebf7594c54472c6ecf11eed2e1
+    "peacock.color": "#ebc8ec",
+    "explorer.experimental.fileNesting.enabled": true,
+    "explorer.experimental.fileNesting.expand": false,
+    "explorer.experimental.fileNesting.patterns": {
+        "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml",
+        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+        "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+        "*.dart": "$(capture).g.dart, $(capture).freezed.dart",
+    }
 }
