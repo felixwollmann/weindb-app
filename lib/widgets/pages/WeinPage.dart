@@ -131,6 +131,7 @@ class _WeinPageState extends State<WeinPage> {
                 const SizedBox(height: kDefaultPadding),
                 ActionButton(
                   label: 'Bearbeiten',
+                  isFilled: true,
                   icon: Icons.edit_rounded,
                   onTap: () {
                     // TODO: add the right Route here
@@ -139,7 +140,7 @@ class _WeinPageState extends State<WeinPage> {
                         builder: (context) => Scaffold(
                           appBar: AppBar(),
                           body: const Center(
-                            child: Text('TODO'),
+                            child: Text('TODO\nHere should be a page to edit this wine.'),
                           ),
                         ),
                       ),
