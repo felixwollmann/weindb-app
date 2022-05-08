@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/constants.dart';
 
+/// Used as a base for [ExpandableWeinbauer], [ExpandableSorte], and [ExpandableRegion]
 class ExpandableBase extends StatelessWidget {
   // final WeinbauerModel weinbauer;
   final String title;

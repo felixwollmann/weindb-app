@@ -2,8 +2,13 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/constants.dart';
 
-import '../theme/WeinFarbenUIColor.dart';
+import '../../theme/WeinFarbenUIColor.dart';
 
+/// List tile for displaying [Wein], [Sorte], [Weinbauer] and [Region]
+/// 
+/// You can either supply [openBuilder]  OR [onTap].
+/// If you supply [openBuilder], a container-transform-animation (the listTile gets bigger and gets morphed into [openBuilder]).
+/// If you supply [onTap], that function will be called and can do whatever it wants, e.g. select the current item in a search.
 class MyListItem extends StatelessWidget {
   MyListItem(
       {Key? key,

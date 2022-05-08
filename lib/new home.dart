@@ -11,7 +11,7 @@ import 'package:weindb/theme/components/Things.dart';
 
 import 'package:weindb/pages/edit/edit.dart';
 import 'package:weindb/theme/constants.dart';
-import 'package:weindb/widgets/WeinListItem.dart';
+import 'package:weindb/widgets/list_items/wein_list_item.dart';
 
 import 'models/models.dart';
 

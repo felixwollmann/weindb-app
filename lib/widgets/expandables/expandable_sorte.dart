@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/constants.dart';
-import 'package:weindb/widgets/expandable_base.dart';
+import 'package:weindb/widgets/components/expandable_base.dart';
 
-import '../models/models.dart';
-import 'colored_button.dart';
+import '../../models/models.dart';
+import '../components/colored_button.dart';
 
 class ExpandableSorte extends StatelessWidget {
   final SorteModel sorte;

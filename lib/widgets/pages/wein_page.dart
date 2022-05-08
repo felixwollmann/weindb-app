@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weindb/theme/WeinFarbenUIColor.dart';
 import 'package:weindb/theme/constants.dart';
-import 'package:weindb/widgets/expandable_sorte.dart';
-import 'package:weindb/widgets/expandable_weinbauer.dart';
-import 'package:weindb/widgets/wein_availibility_display.dart';
+import 'package:weindb/widgets/expandables/expandable_sorte.dart';
+import 'package:weindb/widgets/expandables/expandable_weinbauer.dart';
+import 'package:weindb/widgets/components/wein_availibility_display.dart';
 
 import '../../models/models.dart';
-import '../SmallCard.dart';
-import '../action_button.dart';
+import '../components/small_card.dart';
+import '../components/action_button.dart';
 
 class WeinPage extends StatefulWidget {
   const WeinPage({Key? key, required this.weinModel}) : super(key: key);

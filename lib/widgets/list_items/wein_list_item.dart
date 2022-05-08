@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/WeinFarbenUIColor.dart';
-import 'package:weindb/widgets/pages/WeinPage.dart';
+import 'package:weindb/widgets/pages/wein_page.dart';
 // import 'package:animations/animations.dart';
 
-import '../models/models.dart';
-import 'MyListItem.dart';
+import '../../models/models.dart';
+import '../components/my_list_item.dart';
 
 class WeinListItem extends StatelessWidget {
   WeinListItem(this.weinModel, {Key? key, this.onTap})

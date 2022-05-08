@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weindb/theme/constants.dart';
-import 'package:weindb/widgets/colored_button.dart';
-import 'package:weindb/widgets/expandable_base.dart';
+import 'package:weindb/widgets/components/colored_button.dart';
+import 'package:weindb/widgets/components/expandable_base.dart';
 import 'package:weindb/widgets/pages/weinbauer_page.dart';
 
-import '../models/models.dart';
+import '../../models/models.dart';
 
 class ExpandableWeinbauer extends StatelessWidget {
   final WeinbauerModel weinbauer;

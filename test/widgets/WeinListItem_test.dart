@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weindb/main.dart';
 import 'package:weindb/models/models.dart';
 import 'package:weindb/settings_generation/settings_generation.dart';
-import 'package:weindb/widgets/WeinListItem.dart';
+import 'package:weindb/widgets/list_items/wein_list_item.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
